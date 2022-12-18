@@ -74,8 +74,5 @@
     "src/**/*.ts",
     "src/**/*.d.ts"
   ],
-  "exclude": [
-    "src/public/",
-    "src/routes.DELETE"
-  ]
+  "exclude": []
 }

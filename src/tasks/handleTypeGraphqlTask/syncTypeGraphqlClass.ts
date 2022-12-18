@@ -25,7 +25,7 @@ const syncTypeGraphqlClass = async (config: BgCodeGenClassConfig): Promise<numbe
     }
   }
 
-  fs.writeFileSync(config.objectPath + 'OUT', outLines.join('\r\n'))
+  fs.writeFileSync(config.objectPath + 'OUT', outLines.join('\r\n') + '\r\n')
 
   return 0
 }
