@@ -13,7 +13,7 @@ const userSignupInput: BgCodeGenClassConfig = {
     { name: 'username', dataType: 'string' },
     { name: 'email', dataType: 'string' },
     { name: 'phoneNumber', dataType: 'string' },
-    { name: 'password', dataType: 'string', optional: false },
+    { name: 'password', dataType: 'string' },
     { name: 'source', dataType: 'string' },
     { name: 'deviceUuid', dataType: 'string' },
     { name: 'timezone', dataType: 'string' },

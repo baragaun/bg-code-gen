@@ -17,6 +17,8 @@ import userMetadataInput from './userMetadataInput.js'
 import userPreferences from './userPreferences.js'
 import userPreferencesInput from './userPreferencesInput.js'
 import userSignupInput from './userSignupInput.js'
+import modelEvent from './modelEvent.js'
+import baseModelMetadata from './baseModelMetadata.js'
 
 const syncTypeGraphqlClassesTask: SyncTypeGraphqlClassesTask = {
   taskType: TaskType.SYNC_TYPE_GRAPHQL_CLASS,
@@ -24,12 +26,14 @@ const syncTypeGraphqlClassesTask: SyncTypeGraphqlClassesTask = {
   mongoDbCollectionsPath: '../mm-backend-core/src/services/db/mongoDb/helpers/collections.ts',
   classes: [
     baseModel,
+    baseModelMetadata,
     company,
     companyInput,
     group,
     groupInput,
     groupMember,
     groupMemberInput,
+    modelEvent,
     user,
     userInput,
     userMetadata,

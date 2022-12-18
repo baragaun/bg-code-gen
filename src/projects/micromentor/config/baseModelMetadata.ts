@@ -4,12 +4,12 @@ import { GraphqlType } from '../../../enums.js'
 const baseModelMetadata: BgCodeGenClassConfig = {
   name: 'BaseModelMetadata',
   graphqlType: GraphqlType.ObjectType,
-  extends: 'BaseModel',
-  path: '../mm-backend-core/src/services/accounts/types/classes/BaseModelMetadata.ts',
-  dbCollectionName: 'user-metadata',
+  // extends: 'BaseModel',
+  path: '../mm-backend-core/src/services/models/types/BaseModelMetadata.ts',
+  // dbCollectionName: 'user-metadata',
   active: true,
   attributes: [
-    { name: 'latestActivityAt', dataType: 'Date', optional: true },
+    { name: 'events', dataType: 'ModelEvent[]', default: '[]' },
   ]
 }
 
