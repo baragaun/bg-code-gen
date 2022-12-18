@@ -11,7 +11,7 @@ const groupMember: BgCodeGenClassConfig = {
   attributes: [
     { name: 'groupId', dataType: 'id' },
     { name: 'userId', dataType: 'id' },
-    { name: 'roles', dataType: 'GroupMemberRole[]', default: '[]' },
+    { name: 'roles', dataType: 'GroupMemberRole[]', default: '[]', optional: false },
   ]
 }
 

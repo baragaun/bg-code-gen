@@ -1,11 +1,11 @@
 import { BgCodeGenClassConfig } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const addUserInput: BgCodeGenClassConfig = {
-  name: 'AddUserInput',
+const userSignupInput: BgCodeGenClassConfig = {
+  name: 'UserSignupInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: '../mm-backend-core/src/services/accounts/types/classes/AddUserInput.ts',
+  path: '../mm-backend-core/src/services/accounts/types/classes/UserSignupInput.ts',
   active: true,
   attributes: [
     { name: 'firstName', dataType: 'string' },
@@ -13,11 +13,13 @@ const addUserInput: BgCodeGenClassConfig = {
     { name: 'username', dataType: 'string' },
     { name: 'email', dataType: 'string' },
     { name: 'phoneNumber', dataType: 'string' },
-    { name: 'password', dataType: 'string' },
+    { name: 'password', dataType: 'string', optional: false },
     { name: 'source', dataType: 'string' },
+    { name: 'deviceUuid', dataType: 'string' },
     { name: 'timezone', dataType: 'string' },
     { name: 'pushNotificationToken', dataType: 'string' },
+    { name: 'checkAvailable', dataType: 'boolean', default: 'true' },
   ]
 }
 
-export default addUserInput
+export default userSignupInput

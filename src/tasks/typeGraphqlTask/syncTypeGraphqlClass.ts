@@ -11,7 +11,9 @@ const syncTypeGraphqlClass = async (
   if (!config.path) {
     return 0
   }
-  fs.copyFileSync(config.path, config.path + '.backup')
+  if (process.env.BACK_UP_FILES && ['yes', '1', 'true'].includes(process.env.BACK_UP_FILES.toLowerCase())) {
+    fs.copyFileSync(config.path, config.path + '.backup')
+  }
 
   let outLines: string[] = []
   const sections = await readFileIntoSections(

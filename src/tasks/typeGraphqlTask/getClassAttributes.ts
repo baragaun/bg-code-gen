@@ -59,13 +59,10 @@ const getTypescriptType = (dataType: string): string => {
   return dataType.endsWith('[]') ? s + '[]' : s
 }
 
-const getTypescriptTypeText = (attr: BgCodeGenAttributeConfig, isInputType: boolean): string => {
-  const optional = attr.optional || isInputType
-
+const getTypescriptTypeText = (attr: BgCodeGenAttributeConfig, isOptional: boolean): string => {
   if (
     (attr.dataType === 'string' || attr.dataType === 'id') &&
-    !attr.optional &&
-    !isInputType
+    !isOptional
   ) {
     return ''
   }
@@ -74,8 +71,7 @@ const getTypescriptTypeText = (attr: BgCodeGenAttributeConfig, isInputType: bool
     primitiveDataTypes.includes(attr.dataType) &&
     attr.default &&
     attr.default !== '' &&
-    !attr.optional &&
-    !isInputType
+    !isOptional
   ) {
     return ''
   }
@@ -83,20 +79,16 @@ const getTypescriptTypeText = (attr: BgCodeGenAttributeConfig, isInputType: bool
   const typeScriptType = getTypescriptType(attr.dataType)
 
   return (
-    (optional ?  '?:' : ':') +
+    (isOptional ?  '?:' : ':') +
     ' ' +
     typeScriptType
   )
 }
 
-const getDefaultText = (attr: BgCodeGenAttributeConfig, isInputType: boolean): string => {
-  if (isInputType) {
-    return ''
-  }
-
+const getDefaultText = (attr: BgCodeGenAttributeConfig, isOptional: boolean): string => {
   if (
     (attr.dataType === 'string' || attr.dataType === 'id') &&
-    !attr.optional &&
+    !isOptional &&
     !attr.default
   ) {
     return ' = \'\''
@@ -117,19 +109,25 @@ const getClassAttributes = (config: BgCodeGenClassConfig, indentLevel: number): 
   lines.push(prefix + '// @bg-codegen:class.attr >>Note: Code is generated between these markers<<')
 
   for (const attr of config.attributes) {
-    let gqlOptional = ''
+    let isOptional = (
+      (
+        (isInputType && !attr.default) ||
+        (!isInputType && !!attr.optional)
+      ) &&
+      attr.optional !== false
+    )
+    let gqlOptional = isOptional ? ', { nullable: true }' : ''
 
-    if (attr.optional || isInputType) {
-      gqlOptional = ', { nullable: true }'
-    }
-
+    // GraphQL @Field tag:
     lines.push(prefix + `@Field(_type => ${getGraphQlType(attr.dataType)}${gqlOptional})`)
-    if (attr.optional || isInputType) {
+    if (isOptional) {
       lines.push(prefix + '@IsOptional()')
     }
 
-    let line = prefix + `public ${attr.name}${getTypescriptTypeText(attr, isInputType)}${getDefaultText(attr, isInputType)}\r\n`
-    lines.push(line)
+    // Variable declaration:
+    const typescriptText = getTypescriptTypeText(attr, isOptional)
+    const defaultText = getDefaultText(attr, isOptional)
+    lines.push(prefix + `public ${attr.name}${typescriptText}${defaultText}\r\n`)
   }
   // Removing the double new line of the last attribute:
   lines[lines.length - 1] = lines[lines.length - 1].substring(0, lines[lines.length - 1].length - 2)
