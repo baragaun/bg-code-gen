@@ -1,0 +1,49 @@
+{
+  "name": "bg-code-gen",
+  "version": "1.0.0",
+  "description": "Baragaun code generator",
+  "main": "dist/index.js",
+  "repository": "git@github.com:baragaun/bg-code-gen.git",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "lint": "npx eslint --ext .ts src/",
+    "lint:fix": "npx eslint --ext .ts --fix src/",
+    "lint:tests": "npx eslint --ext .ts spec/",
+    "start": "ENVIRONMENT=development node -r dotenv/config ./dist/app --env=development | bunyan",
+    "start-DELETE": "node ./dist --env=production",
+    "start-prod": "node ./dist/app --env=production",
+    "dev": "nodemon",
+    "test": "NODE_ENV=test mocha",
+    "test.DELETE": "nodemon --config ./spec/nodemon.json",
+    "check-circular-refs": "npx dpdm --no-warning --no-tree src/app/index.ts"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/chai-moment": "^0.1.1",
+    "@types/chance": "^1.1.3",
+    "@types/command-line-args": "^5.2.0",
+    "@types/find": "^0.2.1",
+    "@types/fs-extra": "^9.0.13",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "chai-moment": "^0.1.0",
+    "chance": "^1.1.9",
+    "eslint": "^8.30.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "mocha": "^10.2.0",
+    "mockdate": "^3.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "command-line-args": "^5.2.1",
+    "find": "^0.3.0",
+    "fs-extra": "^11.1.0"
+  }
+}
