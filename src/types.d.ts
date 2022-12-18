@@ -1,3 +1,5 @@
+import { TaskType } from './enums.js'
+
 export interface BgCodeGenAttributeConfig {
   name: string
   dataType: string
@@ -7,18 +9,21 @@ export interface BgCodeGenAttributeConfig {
 
 export interface BgCodeGenClassConfig {
   name: string
-  objectPath: string
-  inputPath: string
-  dbCollectionName: string
+  active?: boolean
+  graphqlType: GraphqlType
+  extends?: string
+  path?: string
+  dbCollectionName?: string
   attributes: BgCodeGenAttributeConfig[]
 }
 
 abstract interface BgCodeGenTask {
-  name: string
+  taskType: string
 }
 
 export interface SyncTypeGraphqlClassesTask extends BgCodeGenTask {
-  name: 'sync-type-graphql-class'
+  taskType: TaskType
+  active: boolean,
   mongoDbCollectionsPath: string
   classes: BgCodeGenClassConfig[]
 }

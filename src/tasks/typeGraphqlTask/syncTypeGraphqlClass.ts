@@ -5,10 +5,17 @@ import readFileIntoSections from '../../helpers/readFileIntoSections.js'
 import getClassAttributes from './getClassAttributes.js'
 import getAttributeOverwrites from './getAttributeOverwrites.js'
 
-const syncTypeGraphqlClass = async (config: BgCodeGenClassConfig): Promise<number> => {
+const syncTypeGraphqlClass = async (
+  config: BgCodeGenClassConfig,
+): Promise<number> => {
+  if (!config.path) {
+    return 0
+  }
+  fs.copyFileSync(config.path, config.path + '.backup')
+
   let outLines: string[] = []
   const sections = await readFileIntoSections(
-    config.objectPath,
+    config.path,
     [
       '@bg-codegen:class.attr',
       '@bg-codegen:class.const.attr',
@@ -25,7 +32,7 @@ const syncTypeGraphqlClass = async (config: BgCodeGenClassConfig): Promise<numbe
     }
   }
 
-  fs.writeFileSync(config.objectPath + 'OUT', outLines.join('\r\n') + '\r\n')
+  fs.writeFileSync(config.path, outLines.join('\r\n') + '\r\n')
 
   return 0
 }

@@ -1,0 +1,16 @@
+import { BgCodeGenClassConfig } from '../../../types.js'
+import { GraphqlType } from '../../../enums.js'
+
+const groupInput: BgCodeGenClassConfig = {
+  name: 'GroupInput',
+  graphqlType: GraphqlType.InputType,
+  extends: 'BaseModelInput',
+  path: '../mm-backend-core/src/services/accounts/types/classes/GroupInput.ts',
+  active: true,
+  attributes: [
+    { name: 'name', dataType: 'string' },
+    { name: 'slug', dataType: 'string' },
+  ]
+}
+
+export default groupInput

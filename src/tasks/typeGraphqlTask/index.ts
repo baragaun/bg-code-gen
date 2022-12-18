@@ -2,7 +2,13 @@ import { SyncTypeGraphqlClassesTask } from '../../types.js'
 import syncTypeGraphqlClass from './syncTypeGraphqlClass.js'
 
 const doNextClass = async (task: SyncTypeGraphqlClassesTask, classIndex: number): Promise<number> => {
-  const result = await syncTypeGraphqlClass(task.classes[classIndex])
+  let result = 0
+  if (task.classes[classIndex].active && task.classes[classIndex].path) {
+    console.log(`syncing class ${task.classes[classIndex].name}`)
+    result = await syncTypeGraphqlClass(task.classes[classIndex])
+  } else {
+    console.log(`skipping class ${task.classes[classIndex].name}`)
+  }
 
   if (classIndex < task.classes.length - 1) {
     return doNextClass(task, classIndex + 1)
@@ -12,6 +18,7 @@ const doNextClass = async (task: SyncTypeGraphqlClassesTask, classIndex: number)
 }
 
 const typeGraphqlTask = async (task: SyncTypeGraphqlClassesTask): Promise<number> => {
+  console.log(`Executing task ${task.taskType}`)
   return doNextClass(task, 0)
 }
 

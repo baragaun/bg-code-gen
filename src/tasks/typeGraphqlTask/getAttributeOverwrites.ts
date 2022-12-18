@@ -1,10 +1,10 @@
 import { BgCodeGenClassConfig } from '../../types.js'
 
-const getAttributeOverwrites = (config: BgCodeGenClassConfig, ident: number): string[] => {
+const getAttributeOverwrites = (config: BgCodeGenClassConfig, indentLevel: number): string[] => {
   let lines: string[] = []
-  const prefix = '                          '.substring(0, ident)
+  const prefix = '                          '.substring(0, indentLevel)
 
-  lines.push(prefix + '// @bg-codegen:class.const.attr')
+  lines.push(prefix + '// @bg-codegen:class.const.attr >>Note: Code is generated between these markers<<')
 
   for (const attr of config.attributes) {
     if (attr.dataType === 'boolean') {
@@ -16,7 +16,7 @@ const getAttributeOverwrites = (config: BgCodeGenClassConfig, ident: number): st
     lines.push(prefix + `}`)
   }
 
-  lines.push(prefix + '// @bg-codegen:/class.const.attr')
+  lines.push(prefix + '// @bg-codegen:/class.const.attr >>Note: Code is generated between these markers<<')
 
   return lines
 }
