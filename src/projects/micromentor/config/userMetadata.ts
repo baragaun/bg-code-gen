@@ -1,7 +1,7 @@
-import { BgCodeGenClassConfig } from '../../../types.js'
+import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const userMetadata: BgCodeGenClassConfig = {
+const userMetadata: TypeGraphqlClass = {
   name: 'UserMetadata',
   graphqlType: GraphqlType.ObjectType,
   path: '../mm-backend-core/src/services/accounts/types/classes/UserMetadata.ts',

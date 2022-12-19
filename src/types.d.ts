@@ -1,34 +1,35 @@
-import { TaskType } from './enums.js'
+import { GraphqlType, TaskType } from './enums.js'
 
-export interface BgCodeGenAttributeConfig {
+export interface TypeGraphqlAttr {
   name: string
   dataType: string
   default?: string
   optional?: boolean
 }
 
-export interface BgCodeGenClassConfig {
+export interface TypeGraphqlClass {
   name: string
   active?: boolean
   graphqlType: GraphqlType
   extends?: string
   path?: string
   dbCollectionName?: string
-  attributes: BgCodeGenAttributeConfig[]
+  attributes: TypeGraphqlAttr[]
+  backUpFiles?: boolean
 }
 
 abstract interface BgCodeGenTask {
   taskType: string
 }
 
-export interface SyncTypeGraphqlClassesTask extends BgCodeGenTask {
+export interface TypeGraphqlTask extends BgCodeGenTask {
   taskType: TaskType
   active: boolean,
   mongoDbCollectionsPath: string
-  classes: BgCodeGenClassConfig[]
+  classes: TypeGraphqlClass[]
 }
 
-export interface BgCodeGenConfig {
+export interface BgCodeGenProject {
   tasks: SyncTypeTaskConfig[]
 }
 

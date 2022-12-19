@@ -1,4 +1,4 @@
-import { BgCodeGenAttributeConfig, BgCodeGenClassConfig } from '../../types.js'
+import { TypeGraphqlAttr, TypeGraphqlClass } from '../../types.js'
 import { GraphqlType } from '../../enums.js'
 
 const getGraphQlType = (dataType: string): string => {
@@ -59,7 +59,7 @@ const getTypescriptType = (dataType: string): string => {
   return dataType.endsWith('[]') ? s + '[]' : s
 }
 
-const getTypescriptTypeText = (attr: BgCodeGenAttributeConfig, isOptional: boolean): string => {
+const getTypescriptTypeText = (attr: TypeGraphqlAttr, isOptional: boolean): string => {
   if (
     (attr.dataType === 'string' || attr.dataType === 'id') &&
     !isOptional
@@ -85,7 +85,7 @@ const getTypescriptTypeText = (attr: BgCodeGenAttributeConfig, isOptional: boole
   )
 }
 
-const getDefaultText = (attr: BgCodeGenAttributeConfig, isOptional: boolean): string => {
+const getDefaultText = (attr: TypeGraphqlAttr, isOptional: boolean): string => {
   if (
     (attr.dataType === 'string' || attr.dataType === 'id') &&
     !isOptional &&
@@ -101,7 +101,7 @@ const getDefaultText = (attr: BgCodeGenAttributeConfig, isOptional: boolean): st
   return ''
 }
 
-const getClassAttributes = (config: BgCodeGenClassConfig, indentLevel: number): string[] => {
+const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): string[] => {
   const isInputType = config.graphqlType === GraphqlType.InputType
   let lines: string[] = []
   const prefix = '                          '.substring(0, indentLevel)

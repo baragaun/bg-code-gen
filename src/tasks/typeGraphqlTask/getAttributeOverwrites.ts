@@ -1,6 +1,6 @@
-import { BgCodeGenClassConfig } from '../../types.js'
+import { TypeGraphqlClass } from '../../types.js'
 
-const getAttributeOverwrites = (config: BgCodeGenClassConfig, indentLevel: number): string[] => {
+const getAttributeOverwrites = (config: TypeGraphqlClass, indentLevel: number): string[] => {
   let lines: string[] = []
   const prefix = '                          '.substring(0, indentLevel)
 

@@ -1,13 +1,13 @@
-import { BgCodeGenClassConfig } from '../../../types.js'
+import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const group: BgCodeGenClassConfig = {
+const group: TypeGraphqlClass = {
   name: 'Group',
-  active: true,
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
   path: '../mm-backend-core/src/services/accounts/types/classes/Group.ts',
   dbCollectionName: 'groups',
+  active: true,
   attributes: [
     { name: 'name', dataType: 'string' },
     { name: 'slug', dataType: 'string', optional: true },

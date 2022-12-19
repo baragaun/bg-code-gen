@@ -1,7 +1,7 @@
-import { SyncTypeGraphqlClassesTask } from '../../types.js'
+import { TypeGraphqlTask } from '../../types.js'
 import syncTypeGraphqlClass from './syncTypeGraphqlClass.js'
 
-const doNextClass = async (task: SyncTypeGraphqlClassesTask, classIndex: number): Promise<number> => {
+const doNextClass = async (task: TypeGraphqlTask, classIndex: number): Promise<number> => {
   let result = 0
   if (task.classes[classIndex].active && task.classes[classIndex].path) {
     console.log(`syncing class ${task.classes[classIndex].name}`)
@@ -17,7 +17,7 @@ const doNextClass = async (task: SyncTypeGraphqlClassesTask, classIndex: number)
   return result
 }
 
-const typeGraphqlTask = async (task: SyncTypeGraphqlClassesTask): Promise<number> => {
+const typeGraphqlTask = async (task: TypeGraphqlTask): Promise<number> => {
   console.log(`Executing task ${task.taskType}`)
   return doNextClass(task, 0)
 }

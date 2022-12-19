@@ -1,7 +1,7 @@
-import { BgCodeGenClassConfig } from '../../../types.js'
+import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const companyInput: BgCodeGenClassConfig = {
+const companyInput: TypeGraphqlClass = {
   name: 'CompanyInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',

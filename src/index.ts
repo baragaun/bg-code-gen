@@ -1,14 +1,14 @@
-import { BgCodeGenConfig, SyncTypeGraphqlClassesTask } from './types.js'
+import { BgCodeGenProject, TypeGraphqlTask } from './types.js'
 import { TaskType } from './enums.js'
 import runTypeGraphqlTask from './tasks/typeGraphqlTask/index.js'
 
-const doNextTask = async (config: BgCodeGenConfig, taskIndex: number): Promise<number> => {
+const doNextTask = async (config: BgCodeGenProject, taskIndex: number): Promise<number> => {
   const task = config.tasks[taskIndex]
   let result = 0
 
   if (task.active) {
     if (task.taskType === TaskType.SYNC_TYPE_GRAPHQL_CLASS) {
-      result = await runTypeGraphqlTask(task as SyncTypeGraphqlClassesTask)
+      result = await runTypeGraphqlTask(task as TypeGraphqlTask)
     }
   }
 
@@ -19,7 +19,7 @@ const doNextTask = async (config: BgCodeGenConfig, taskIndex: number): Promise<n
   return result
 }
 
-const codeGen = async (config: BgCodeGenConfig): Promise<number> => {
+const codeGen = async (config: BgCodeGenProject): Promise<number> => {
   console.log('Baragaun Code Generator started.')
   const result = await doNextTask(config, 0)
   console.log('Baragaun Code Generator finished.')

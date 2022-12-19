@@ -1,13 +1,13 @@
-import { BgCodeGenClassConfig } from '../../../types.js'
+import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const user: BgCodeGenClassConfig = {
+const user: TypeGraphqlClass = {
   name: 'User',
-  active: true,
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
   path: '../mm-backend-core/src/services/accounts/types/classes/User.ts',
   dbCollectionName: 'users',
+  active: true,
   attributes: [
     { name: 'appFeatures', dataType: 'AppFeature[]', optional: true },
     { name: 'authType', dataType: 'AuthType', optional: true },

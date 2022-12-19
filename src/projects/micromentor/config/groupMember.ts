@@ -1,7 +1,7 @@
-import { BgCodeGenClassConfig } from '../../../types.js'
+import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const groupMember: BgCodeGenClassConfig = {
+const groupMember: TypeGraphqlClass = {
   name: 'GroupMember',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
