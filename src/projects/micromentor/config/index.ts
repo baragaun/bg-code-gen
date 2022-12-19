@@ -7,6 +7,7 @@ import appliedGroupRule from './appliedGroupRule.js'
 import appliedGroupRuleInput from './appliedGroupRuleInput.js'
 import baseModel from './baseModel.js'
 import baseModelMetadata from './baseModelMetadata.js'
+import baseModelMetadataInput from './baseModelMetadataInput.js'
 import company from './company.js'
 import companyInput from './companyInput.js'
 import entrepreneursGroupMember from './entrepreneursGroupMember.js'
@@ -40,6 +41,7 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     appliedGroupRuleInput,
     baseModel,
     baseModelMetadata,
+    baseModelMetadataInput,
     company,
     companyInput,
     expertise,
