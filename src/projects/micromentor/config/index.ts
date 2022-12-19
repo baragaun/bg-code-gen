@@ -9,6 +9,8 @@ import baseModel from './baseModel.js'
 import baseModelMetadata from './baseModelMetadata.js'
 import company from './company.js'
 import companyInput from './companyInput.js'
+import entrepreneursGroupMember from './entrepreneursGroupMember.js'
+import expertise from './expertise.js'
 import group from './group.js'
 import groupInput from './groupInput.js'
 import groupMember from './groupMember.js'
@@ -17,6 +19,7 @@ import groupRule from './groupRule.js'
 import groupRuleBaseConfig from './groupRuleBaseConfig.js'
 import groupRuleBaseConfigInput from './groupRuleBaseConfigInput.js'
 import groupRuleInput from './groupRuleInput.js'
+import mentorsGroupMember from './mentorsGroupMember.js'
 import modelEvent from './modelEvent.js'
 import user from './user.js'
 import userDevice from './userDevice.js'
@@ -39,6 +42,8 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     baseModelMetadata,
     company,
     companyInput,
+    expertise,
+    entrepreneursGroupMember,
     group,
     groupInput,
     groupMember,
@@ -47,6 +52,7 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     groupRuleBaseConfig,
     groupRuleBaseConfigInput,
     groupRuleInput,
+    mentorsGroupMember,
     modelEvent,
     user,
     userDevice,
