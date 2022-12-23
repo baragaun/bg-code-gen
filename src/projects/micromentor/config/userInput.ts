@@ -5,7 +5,7 @@ const userInput: TypeGraphqlClass = {
   name: 'UserInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: '../mm-backend-core/src/services/accounts/types/classes/UserInput.ts',
+  path: '/src/services/accounts/types/classes/UserInput.ts',
   active: true,
   attributes: [
     { name: 'firstName', dataType: 'string' },

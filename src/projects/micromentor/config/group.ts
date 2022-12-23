@@ -5,7 +5,7 @@ const group: TypeGraphqlClass = {
   name: 'Group',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: '../mm-backend-core/src/services/accounts/types/classes/Group.ts',
+  path: '/src/services/accounts/types/classes/Group.ts',
   dbCollectionName: 'groups',
   active: true,
   attributes: [

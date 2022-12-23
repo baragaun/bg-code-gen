@@ -4,7 +4,7 @@ import { GraphqlType } from '../../../enums.js'
 const modelEvent: TypeGraphqlClass = {
   name: 'ModelEvent',
   graphqlType: GraphqlType.ObjectType,
-  path: '../mm-backend-core/src/services/models/types/ModelEvent.ts',
+  path: '/src/services/models/types/ModelEvent.ts',
   active: true,
   attributes: [
     { name: 'time', dataType: 'Date', default: 'new Date()' },

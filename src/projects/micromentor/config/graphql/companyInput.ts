@@ -1,11 +1,11 @@
-import { TypeGraphqlClass } from '../../../types.js'
-import { GraphqlType } from '../../../enums.js'
+import { TypeGraphqlClass } from '../../../../types.js'
+import { GraphqlType } from '../../../../enums.js'
 
 const companyInput: TypeGraphqlClass = {
   name: 'CompanyInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: '../mm-backend-core/src/services/accounts/types/classes/CompanyInput.ts',
+  path: '/src/services/accounts/types/classes/CompanyInput.ts',
   active: true,
   attributes: [
     { name: 'name', dataType: 'string' },

@@ -5,7 +5,7 @@ const doNextClass = async (task: TypeGraphqlTask, classIndex: number): Promise<n
   let result = 0
   if (task.classes[classIndex].active && task.classes[classIndex].path) {
     console.log(`syncing class ${task.classes[classIndex].name}`)
-    result = await syncTypeGraphqlClass(task.classes[classIndex])
+    result = await syncTypeGraphqlClass(task, classIndex)
   } else {
     console.log(`skipping class ${task.classes[classIndex].name}`)
   }

@@ -1,26 +1,26 @@
 import * as fs from 'fs'
 
-import { TypeGraphqlClass } from '../../types.js'
+import { TypeGraphqlClass, TypeGraphqlTask } from '../../types.js'
 import readFileIntoSections from '../../helpers/readFileIntoSections.js'
 import getClassAttributes from './getClassAttributes.js'
 import getAttributeOverwrites from './getAttributeOverwrites.js'
 
-const syncTypeGraphqlClass = async (
-  task: TypeGraphqlClass,
-): Promise<number> => {
-  if (!task.path) {
+const syncTypeGraphqlClass = async (task: TypeGraphqlTask, classIndex: number): Promise<number> => {
+  const graphqlClass: TypeGraphqlClass = task.classes[classIndex]
+  if (!graphqlClass.path) {
     return 0
   }
+  const path = (task.projectRoot || '') + graphqlClass.path
   if (
-    task.backUpFiles ||
+    graphqlClass.backUpFiles ||
     (process.env.BACK_UP_FILES && ['yes', '1', 'true'].includes(process.env.BACK_UP_FILES.toLowerCase()))
   ) {
-    fs.copyFileSync(task.path, task.path + '.backup')
+    fs.copyFileSync(path, path + '.backup')
   }
 
   let outLines: string[] = []
   const sections = await readFileIntoSections(
-    task.path,
+    path,
     [
       '@bg-codegen:class.attr',
       '@bg-codegen:class.const.attr',
@@ -29,15 +29,15 @@ const syncTypeGraphqlClass = async (
 
   for (const section of sections) {
     if (section.tag === '@bg-codegen:class.attr') {
-      outLines = outLines.concat(getClassAttributes(task, section.indent))
+      outLines = outLines.concat(getClassAttributes(graphqlClass, section.indent))
     } else if (section.tag === '@bg-codegen:class.const.attr') {
-      outLines = outLines.concat(getAttributeOverwrites(task, section.indent))
+      outLines = outLines.concat(getAttributeOverwrites(graphqlClass, section.indent))
     } else {
       outLines = outLines.concat(section.lines)
     }
   }
 
-  fs.writeFileSync(task.path, outLines.join('\r\n') + '\r\n')
+  fs.writeFileSync(path, outLines.join('\n') + '\n')
 
   return 0
 }

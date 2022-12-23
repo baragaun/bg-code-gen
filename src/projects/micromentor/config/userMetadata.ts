@@ -4,7 +4,7 @@ import { GraphqlType } from '../../../enums.js'
 const userMetadata: TypeGraphqlClass = {
   name: 'UserMetadata',
   graphqlType: GraphqlType.ObjectType,
-  path: '../mm-backend-core/src/services/accounts/types/classes/UserMetadata.ts',
+  path: '/src/services/accounts/types/classes/UserMetadata.ts',
   active: true,
   attributes: [
     { name: 'latestActivityAt', dataType: 'Date', optional: true },

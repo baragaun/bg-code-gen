@@ -1,11 +1,11 @@
-import { TypeGraphqlClass } from '../../../types.js'
-import { GraphqlType } from '../../../enums.js'
+import { TypeGraphqlClass } from '../../../../types.js'
+import { GraphqlType } from '../../../../enums.js'
 
 const user: TypeGraphqlClass = {
   name: 'UserDeviceInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: '../mm-backend-core/src/services/accounts/types/classes/UserDeviceInput.ts',
+  path: '/src/services/accounts/types/classes/UserDeviceInput.ts',
   active: true,
   attributes: [
     { name: 'userId', dataType: 'id', optional: false },
@@ -34,8 +34,7 @@ const user: TypeGraphqlClass = {
     { name: 'sessionEndedAt', dataType: 'date', optional: true },
     { name: 'authTokenCreatedAt', dataType: 'date', optional: true },
     { name: 'pushNotificationToken', dataType: 'string', default: '\'\'' },
-    { name: 'trustedAt', dataType: 'date' },
-    { name: 'adminNotes', dataType: 'string', default: '\'\'' },
+    { name: 'trustedAt', dataType: 'date', optional: true },
     { name: 'uiLanguage', dataType: 'string', default: '\'\'' },
   ]
 }

@@ -127,10 +127,12 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     // Variable declaration:
     const typescriptText = getTypescriptTypeText(attr, isOptional)
     const defaultText = getDefaultText(attr, isOptional)
-    lines.push(prefix + `public ${attr.name}${typescriptText}${defaultText}\r\n`)
+    lines.push(prefix + `public ${attr.name}${typescriptText}${defaultText}\n`)
   }
-  // Removing the double new line of the last attribute:
-  lines[lines.length - 1] = lines[lines.length - 1].substring(0, lines[lines.length - 1].length - 2)
+  if (config.attributes.length > 0) {
+    // Removing the double new line of the last attribute:
+    lines[lines.length - 1] = lines[lines.length - 1].substring(0, lines[lines.length - 1].length - 1)
+  }
 
   lines.push(prefix + '// @bg-codegen:/class.attr >>Note: Code is generated between these markers<<')
 

@@ -5,7 +5,7 @@ const user: TypeGraphqlClass = {
   name: 'UserDevice',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: '../mm-backend-core/src/services/accounts/types/classes/UserDevice.ts',
+  path: '/src/services/accounts/types/classes/UserDevice.ts',
   dbCollectionName: 'user-devices',
   active: true,
   attributes: [
@@ -36,7 +36,6 @@ const user: TypeGraphqlClass = {
     { name: 'authTokenCreatedAt', dataType: 'date', optional: true },
     { name: 'pushNotificationToken', dataType: 'string', default: '\'\'' },
     { name: 'trustedAt', dataType: 'date', optional: true },
-    { name: 'adminNotes', dataType: 'string', default: '\'\'' },
     { name: 'uiLanguage', dataType: 'string', default: '\'\'' },
   ]
 }

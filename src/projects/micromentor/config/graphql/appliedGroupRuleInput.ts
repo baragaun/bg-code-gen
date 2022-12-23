@@ -1,11 +1,11 @@
-import { TypeGraphqlClass } from '../../../types.js'
-import { GraphqlType } from '../../../enums.js'
+import { TypeGraphqlClass } from '../../../../types.js'
+import { GraphqlType } from '../../../../enums.js'
 
 const appliedGroupRuleInput: TypeGraphqlClass = {
   name: 'AppliedGroupRuleInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModel',
-  path: '../mm-backend-core/src/services/accounts/types/classes/AppliedGroupRuleInput.ts',
+  path: '/src/services/accounts/types/classes/AppliedGroupRuleInput.ts',
   active: true,
   attributes: [
     { name: 'groupRuleId', dataType: 'id', default: '\'\'', optional: false },

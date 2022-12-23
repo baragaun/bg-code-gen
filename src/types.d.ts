@@ -20,6 +20,7 @@ export interface TypeGraphqlClass {
 
 abstract interface BgCodeGenTask {
   taskType: string
+  projectRoot: string
 }
 
 export interface TypeGraphqlTask extends BgCodeGenTask {
