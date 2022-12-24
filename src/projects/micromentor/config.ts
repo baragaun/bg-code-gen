@@ -16,6 +16,7 @@ import company from './classes/company.js'
 import companyInput from './classes/companyInput.js'
 import entrepreneursGroupMember from './classes/entrepreneursGroupMember.js'
 import expertise from './classes/expertise.js'
+import findObjectsOptions from './classes/findObjectsOptions.js'
 import group from './classes/group.js'
 import groupInput from './classes/groupInput.js'
 import groupMember from './classes/groupMember.js'
@@ -56,6 +57,7 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     companyInput,
     expertise,
     entrepreneursGroupMember,
+    findObjectsOptions,
     group,
     groupInput,
     groupMember,
