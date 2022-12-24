@@ -5,7 +5,7 @@ const companyInput: TypeGraphqlClass = {
   name: 'CompanyInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: '/src/services/accounts/types/classes/CompanyInput.ts',
+  path: 'src/services/accounts/types/classes/CompanyInput.ts',
   active: true,
   attributes: [
     { name: 'name', dataType: 'string' },

@@ -5,7 +5,7 @@ const groupInput: TypeGraphqlClass = {
   name: 'GroupInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: '/src/services/accounts/types/classes/GroupInput.ts',
+  path: 'src/services/accounts/types/classes/GroupInput.ts',
   active: true,
   attributes: [
     { name: 'name', dataType: 'string' },

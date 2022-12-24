@@ -5,7 +5,7 @@ const appliedGroupRuleInput: TypeGraphqlClass = {
   name: 'AppliedGroupRuleInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModel',
-  path: '/src/services/accounts/types/classes/AppliedGroupRuleInput.ts',
+  path: 'src/services/accounts/types/classes/AppliedGroupRuleInput.ts',
   active: true,
   attributes: [
     { name: 'groupRuleId', dataType: 'id', default: '\'\'', optional: false },

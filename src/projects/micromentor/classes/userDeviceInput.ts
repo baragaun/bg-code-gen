@@ -5,7 +5,7 @@ const user: TypeGraphqlClass = {
   name: 'UserDeviceInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: '/src/services/accounts/types/classes/UserDeviceInput.ts',
+  path: 'src/services/accounts/types/classes/UserDeviceInput.ts',
   active: true,
   attributes: [
     { name: 'userId', dataType: 'id', optional: false },

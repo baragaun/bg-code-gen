@@ -5,7 +5,7 @@ const baseModelMetadata: TypeGraphqlClass = {
   name: 'BaseModelMetadata',
   graphqlType: GraphqlType.ObjectType,
   // extends: 'BaseModel',
-  path: '/src/services/models/types/BaseModelMetadata.ts',
+  path: 'src/services/models/types/BaseModelMetadata.ts',
   // dbCollectionName: 'user-metadata',
   active: true,
   attributes: [

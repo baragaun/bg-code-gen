@@ -5,7 +5,7 @@ const groupRule: TypeGraphqlClass = {
   name: 'GroupRule',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: '/src/services/accounts/types/classes/GroupRule.ts',
+  path: 'src/services/accounts/types/classes/GroupRule.ts',
   dbCollectionName: 'group-rules',
   active: true,
   attributes: [

@@ -1,35 +1,39 @@
 import { TypeGraphqlAttr, TypeGraphqlClass } from '../../types.js'
 import { GraphqlType } from '../../enums.js'
 
-const getGraphQlType = (dataType: string): string => {
-  let s = dataType
+const getGqlType = (attr: TypeGraphqlAttr, isInputType: boolean): string => {
+  if (attr.gqlType) {
+    return attr.gqlType
+  }
 
-  if (dataType.startsWith('boolean')) {
+  let s = attr.dataType
+
+  if (attr.dataType.startsWith('boolean')) {
     s = 'Boolean'
   }
 
-  if (dataType.startsWith('date')) {
-    s = 'Date'
+  if (attr.dataType.startsWith('date')) {
+    s = isInputType ? 'String' : 'Date'
   }
 
-  if (dataType.startsWith('integer')) {
+  if (attr.dataType.startsWith('integer')) {
     s = 'Int'
   }
 
-  if (dataType.startsWith('string')) {
+  if (attr.dataType.startsWith('string')) {
     s = 'String'
   }
 
-  if (dataType.startsWith('id')) {
+  if (attr.dataType.startsWith('id')) {
     // todo: should this here be 'ID'?
     s = 'ID'
   }
 
   if (s.endsWith('[]')) {
-    s = s.substring(0, dataType.length - 2)
+    s = s.substring(0, attr.dataType.length - 2)
   }
 
-  if (dataType.endsWith('[]')) {
+  if (attr.dataType.endsWith('[]')) {
     s = '[' + s + ']'
   }
 
@@ -44,22 +48,37 @@ const primitiveDataTypes = [
   'float',
 ]
 
-const getTypescriptType = (dataType: string): string => {
-  let s = dataType
+const getTypescriptType = (attr: TypeGraphqlAttr, isInputType: boolean): string => {
+  let s = attr.dataType
+  let orNull = false
+
+  if (s === 'date' && isInputType) {
+    return 'Date | string | null'
+  }
 
   if (s.startsWith('date')) {
     s = 'Date'
+    orNull = isInputType
   } else if (s.startsWith('integer')) {
     s = 'number'
   } else if (s.startsWith('id')) {
     s = 'string'
-  } else {
-    return dataType
+  // } else {
+  //   return attr.dataType
   }
-  return dataType.endsWith('[]') ? s + '[]' : s
+
+  if (attr.dataType.endsWith('[]') && !s.endsWith('[]')) {
+    s += '[]'
+  }
+
+  if (orNull) {
+    s += ' | null'
+  }
+
+  return s
 }
 
-const getTypescriptTypeText = (attr: TypeGraphqlAttr, isOptional: boolean): string => {
+const getTypescriptTypeText = (attr: TypeGraphqlAttr, isInputType: boolean, isOptional: boolean): string => {
   if (
     (attr.dataType === 'string' || attr.dataType === 'id') &&
     !isOptional
@@ -76,7 +95,7 @@ const getTypescriptTypeText = (attr: TypeGraphqlAttr, isOptional: boolean): stri
     return ''
   }
 
-  const typeScriptType = getTypescriptType(attr.dataType)
+  const typeScriptType = getTypescriptType(attr, isInputType)
 
   return (
     (isOptional ?  '?:' : ':') +
@@ -119,13 +138,13 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     let gqlOptional = isOptional ? ', { nullable: true }' : ''
 
     // GraphQL @Field tag:
-    lines.push(prefix + `@Field(_type => ${getGraphQlType(attr.dataType)}${gqlOptional})`)
+    lines.push(prefix + `@Field(_type => ${getGqlType(attr, isInputType)}${gqlOptional})`)
     if (isOptional) {
       lines.push(prefix + '@IsOptional()')
     }
 
     // Variable declaration:
-    const typescriptText = getTypescriptTypeText(attr, isOptional)
+    const typescriptText = getTypescriptTypeText(attr, isInputType, isOptional)
     const defaultText = getDefaultText(attr, isOptional)
     lines.push(prefix + `public ${attr.name}${typescriptText}${defaultText}\n`)
   }

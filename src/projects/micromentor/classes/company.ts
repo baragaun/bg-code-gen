@@ -5,7 +5,7 @@ const company: TypeGraphqlClass = {
   name: 'Company',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: '/src/services/accounts/types/classes/Company.ts',
+  path: 'src/services/accounts/types/classes/Company.ts',
   dbCollectionName: 'companies',
   active: true,
   attributes: [

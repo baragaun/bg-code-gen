@@ -5,6 +5,7 @@ import {
 import { TaskType } from '../../enums.js'
 import appliedGroupRule from './classes/appliedGroupRule.js'
 import appliedGroupRuleInput from './classes/appliedGroupRuleInput.js'
+import baseListFilter from './classes/baseListFilter.js'
 import baseModel from './classes/baseModel.js'
 import baseModelMetadata from './classes/baseModelMetadata.js'
 import baseModelMetadataInput from './classes/baseModelMetadataInput.js'
@@ -44,6 +45,7 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
   classes: [
     appliedGroupRule,
     appliedGroupRuleInput,
+    baseListFilter,
     baseModel,
     baseModelMetadata,
     baseModelMetadataInput,

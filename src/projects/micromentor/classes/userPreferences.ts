@@ -4,7 +4,7 @@ import { GraphqlType } from '../../../enums.js'
 const userPreferences: TypeGraphqlClass = {
   name: 'UserPreferences',
   graphqlType: GraphqlType.ObjectType,
-  path: '/src/services/accounts/types/classes/UserPreferences.ts',
+  path: 'src/services/accounts/types/classes/UserPreferences.ts',
   dbCollectionName: 'user-preferences',
   active: true,
   attributes: [

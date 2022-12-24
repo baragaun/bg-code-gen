@@ -5,7 +5,7 @@ const user: TypeGraphqlClass = {
   name: 'UserDevice',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: '/src/services/accounts/types/classes/UserDevice.ts',
+  path: 'src/services/accounts/types/classes/UserDevice.ts',
   dbCollectionName: 'user-devices',
   active: true,
   attributes: [

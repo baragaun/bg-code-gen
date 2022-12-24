@@ -5,7 +5,7 @@ const appliedGroupRule: TypeGraphqlClass = {
   name: 'AppliedGroupRule',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: '/src/services/accounts/types/classes/AppliedGroupRule.ts',
+  path: 'src/services/accounts/types/classes/AppliedGroupRule.ts',
   dbCollectionName: 'applied-group-rules',
   active: true,
   attributes: [

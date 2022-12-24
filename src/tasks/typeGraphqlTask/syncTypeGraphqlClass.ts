@@ -10,7 +10,7 @@ const syncTypeGraphqlClass = async (task: TypeGraphqlTask, classIndex: number): 
   if (!graphqlClass.path) {
     return 0
   }
-  const path = (task.projectRoot || '') + graphqlClass.path
+  const path = task.projectRoot ? `${task.projectRoot}/${graphqlClass.path}` : graphqlClass.path
   if (
     graphqlClass.backUpFiles ||
     (process.env.BACK_UP_FILES && ['yes', '1', 'true'].includes(process.env.BACK_UP_FILES.toLowerCase()))

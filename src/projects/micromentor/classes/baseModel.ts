@@ -4,7 +4,7 @@ import { GraphqlType } from '../../../enums.js'
 const baseModel: TypeGraphqlClass = {
   name: 'BaseModel',
   graphqlType: GraphqlType.ObjectType,
-  path: '/src/services/models/types/BaseModel.ts',
+  path: 'src/services/models/types/BaseModel.ts',
   active: true,
   attributes: [
     { name: 'id', dataType: 'id' },

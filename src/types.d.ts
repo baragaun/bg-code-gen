@@ -3,6 +3,7 @@ import { GraphqlType, TaskType } from './enums.js'
 export interface TypeGraphqlAttr {
   name: string
   dataType: string
+  gqlType?: string
   default?: string
   optional?: boolean
 }
