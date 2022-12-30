@@ -36,11 +36,14 @@ import userMetadata from './classes/userMetadata.js'
 import userMetadataInput from './classes/userMetadataInput.js'
 import userPreferences from './classes/userPreferences.js'
 import userPreferencesInput from './classes/userPreferencesInput.js'
-import userSignupInput from './classes/userSignupInput.js'
+import UserSignInInput from './classes/userSignInInput.js'
+import UserSignInResponse from './classes/userSignInResponse.js'
+import UserSignUpInput from './classes/userSignUpInput.js'
 
 const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
   taskType: TaskType.SYNC_TYPE_GRAPHQL_CLASS,
-  projectRoot: '../../micromentor/mm-backend-core',
+  // projectRoot: '../../micromentor/mm-backend-core',
+  projectRoot: '../mm-backend-core',
   mongoDbCollectionsPath: '/src/services/db/mongoDb/helpers/collections.ts',
   active: true,
   classes: [
@@ -77,7 +80,9 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     userMetadataInput,
     userPreferences,
     userPreferencesInput,
-    userSignupInput,
+    UserSignInInput,
+    UserSignInResponse,
+    UserSignUpInput,
   ],
 }
 
