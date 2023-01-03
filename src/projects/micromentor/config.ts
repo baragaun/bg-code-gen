@@ -10,8 +10,11 @@ import baseModel from './classes/baseModel.js'
 import baseModelMetadata from './classes/baseModelMetadata.js'
 import baseModelMetadataInput from './classes/baseModelMetadataInput.js'
 import chat from './classes/chat.js'
+import chatInput from './classes/chatInput.js'
 import chatMessage from './classes/chatMessage.js'
+import chatMessageInput from './classes/chatMessageInput.js'
 import chatParticipant from './classes/chatParticipant.js'
+import chatParticipantInput from './classes/chatParticipantInput.js'
 import company from './classes/company.js'
 import companyInput from './classes/companyInput.js'
 import entrepreneursGroupMember from './classes/entrepreneursGroupMember.js'
@@ -37,7 +40,6 @@ import userMetadataInput from './classes/userMetadataInput.js'
 import userPreferences from './classes/userPreferences.js'
 import userPreferencesInput from './classes/userPreferencesInput.js'
 import UserSignInInput from './classes/userSignInInput.js'
-import UserSignInResponse from './classes/userSignInResponse.js'
 import UserSignUpInput from './classes/userSignUpInput.js'
 
 const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
@@ -54,8 +56,11 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     baseModelMetadata,
     baseModelMetadataInput,
     chat,
+    chatInput,
     chatMessage,
+    chatMessageInput,
     chatParticipant,
+    chatParticipantInput,
     company,
     companyInput,
     expertise,
@@ -81,7 +86,6 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     userPreferences,
     userPreferencesInput,
     UserSignInInput,
-    UserSignInResponse,
     UserSignUpInput,
   ],
 }

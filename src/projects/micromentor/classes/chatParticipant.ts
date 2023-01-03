@@ -5,7 +5,7 @@ const chatParticipant: TypeGraphqlClass = {
   name: 'ChatParticipant',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: 'src/services/chat/types/classes/ChatParticipant.ts',
+  path: 'src/services/chats/types/classes/ChatParticipant.ts',
   dbCollectionName: 'chatParticipants',
   active: true,
   attributes: [

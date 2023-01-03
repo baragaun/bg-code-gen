@@ -5,7 +5,7 @@ const chatMessage: TypeGraphqlClass = {
   name: 'ChatMessage',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: 'src/services/chat/types/classes/ChatMessage.ts',
+  path: 'src/services/chats/types/classes/ChatMessage.ts',
   dbCollectionName: 'chatMessages',
   active: true,
   attributes: [
