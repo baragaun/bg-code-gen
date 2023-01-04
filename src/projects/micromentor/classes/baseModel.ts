@@ -14,7 +14,8 @@ const baseModel: TypeGraphqlClass = {
     { name: 'createdAt', dataType: 'Date', default: 'new Date()' },
     { name: 'updatedAt', dataType: 'Date', optional: true },
     { name: 'deletedAt', dataType: 'Date', optional: true },
-    { name: 'updatedBy', dataType: 'string', optional: true },
+    { name: 'createdBy', dataType: 'id', optional: true },
+    { name: 'updatedBy', dataType: 'id', optional: true },
   ]
 }
 

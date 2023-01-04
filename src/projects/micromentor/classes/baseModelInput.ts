@@ -9,12 +9,13 @@ const baseModelInput: TypeGraphqlClass = {
   attributes: [
     { name: 'id', dataType: 'id' },
     { name: 'modelType', dataType: 'ModelType' },
-    { name: 'adminNotes', dataType: 'string', optional: true },
-    { name: 'metadata', dataType: 'BaseModelMetadataInput', optional: true },
-    { name: 'createdAt', dataType: 'Date', default: 'new Date()' },
-    { name: 'updatedAt', dataType: 'Date', optional: true },
-    { name: 'deletedAt', dataType: 'Date', optional: true },
-    { name: 'updatedBy', dataType: 'string', optional: true },
+    { name: 'adminNotes', dataType: 'string' },
+    { name: 'metadata', dataType: 'BaseModelMetadataInput' },
+    { name: 'createdAt', dataType: 'Date' },
+    { name: 'updatedAt', dataType: 'Date' },
+    { name: 'deletedAt', dataType: 'Date' },
+    { name: 'createdBy', dataType: 'id' },
+    { name: 'updatedBy', dataType: 'id' },
   ]
 }
 

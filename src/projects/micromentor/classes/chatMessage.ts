@@ -9,11 +9,12 @@ const chatMessage: TypeGraphqlClass = {
   dbCollectionName: 'chatMessages',
   active: true,
   attributes: [
+    { name: 'chatId', dataType: 'id' },
+    { name: 'userId', dataType: 'id' },
+    { name: 'replyToMessageId', dataType: 'id' },
     { name: 'chatMessageType', dataType: 'ChatMessageType', default: 'ChatMessageType.NOT_SET' },
-    { name: 'status', dataType: 'ChatMessageStatus', default: 'ChatMessageStatus.NOT_SET' },
-    { name: 'createdByUserId', dataType: 'id' },
     { name: 'messageText', dataType: 'string' },
-    { name: 'seenAt', dataType: 'date', optional: true },
+    { name: 'statuses', dataType: 'ChatMessageStatus[]', default: '[]' },
   ]
 }
 

@@ -11,7 +11,6 @@ const chatInput: TypeGraphqlClass = {
     { name: 'chatType', dataType: 'ChatType' },
     { name: 'chatStatus', dataType: 'ChatStatus' },
     { name: 'participantIds', dataType: 'string[]' },
-    { name: 'createdByUserId', dataType: 'string' },
     { name: 'pausedAt', dataType: 'date' },
     { name: 'archivedAt', dataType: 'date' },
   ]

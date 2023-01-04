@@ -8,11 +8,12 @@ const chatMessageInput: TypeGraphqlClass = {
   path: 'src/services/chats/types/classes/ChatMessageInput.ts',
   active: true,
   attributes: [
+    { name: 'chatId', dataType: 'id' },
+    { name: 'userId', dataType: 'id' },
+    { name: 'replyToMessageId', dataType: 'id' },
     { name: 'chatMessageType', dataType: 'ChatMessageType' },
-    { name: 'status', dataType: 'ChatMessageStatus' },
-    { name: 'createdByUserId', dataType: 'id' },
     { name: 'messageText', dataType: 'string' },
-    { name: 'seenAt', dataType: 'date' },
+    { name: 'statuses', dataType: 'ChatMessageStatusInput[]' },
   ]
 }
 

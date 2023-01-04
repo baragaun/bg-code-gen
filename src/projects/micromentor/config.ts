@@ -7,11 +7,14 @@ import appliedGroupRule from './classes/appliedGroupRule.js'
 import appliedGroupRuleInput from './classes/appliedGroupRuleInput.js'
 import baseListFilter from './classes/baseListFilter.js'
 import baseModel from './classes/baseModel.js'
+import baseModelInput from './classes/baseModelInput.js'
 import baseModelMetadata from './classes/baseModelMetadata.js'
 import baseModelMetadataInput from './classes/baseModelMetadataInput.js'
 import chat from './classes/chat.js'
 import chatInput from './classes/chatInput.js'
 import chatMessage from './classes/chatMessage.js'
+import chatMessageStatus from './classes/chatMessageStatus.js'
+import chatMessageStatusInput from './classes/chatMessageStatusInput.js'
 import chatMessageInput from './classes/chatMessageInput.js'
 import chatParticipant from './classes/chatParticipant.js'
 import chatParticipantInput from './classes/chatParticipantInput.js'
@@ -53,11 +56,14 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     appliedGroupRuleInput,
     baseListFilter,
     baseModel,
+    baseModelInput,
     baseModelMetadata,
     baseModelMetadataInput,
     chat,
     chatInput,
     chatMessage,
+    chatMessageStatus,
+    chatMessageStatusInput,
     chatMessageInput,
     chatParticipant,
     chatParticipantInput,
