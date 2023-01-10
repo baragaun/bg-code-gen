@@ -5,7 +5,7 @@ const groupRuleInput: TypeGraphqlClass = {
   name: 'groupRuleInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: 'src/services/accounts/types/classes/groupRuleInput.ts',
+  path: 'src/services/groups/types/classes/groupRuleInput.ts',
   active: true,
   attributes: [
     { name: 'name', dataType: 'string', default: '\'\'' },

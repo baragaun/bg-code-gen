@@ -1,16 +1,16 @@
 import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const chatParticipantInput: TypeGraphqlClass = {
-  name: 'ChatParticipantInput',
+const channelParticipantInput: TypeGraphqlClass = {
+  name: 'ChannelParticipantInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: 'src/services/chats/types/classes/ChatParticipantInput.ts',
+  path: 'src/services/channels/types/classes/ChannelParticipantInput.ts',
   active: true,
   attributes: [
-    { name: 'chatId', dataType: 'id' },
+    { name: 'channelId', dataType: 'id' },
     { name: 'userId', dataType: 'id' },
   ]
 }
 
-export default chatParticipantInput
+export default channelParticipantInput

@@ -5,7 +5,7 @@ const groupRuleBaseConfig: TypeGraphqlClass = {
   name: 'GroupRuleBaseConfig',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: 'src/services/accounts/types/classes/GroupRuleBaseConfig.ts',
+  path: 'src/services/groups/types/classes/GroupRuleBaseConfig.ts',
   active: true,
   attributes: [
     // { name: 'name', dataType: 'string', default: '\'\'' },

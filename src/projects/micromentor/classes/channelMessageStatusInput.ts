@@ -1,10 +1,10 @@
 import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const chatMessageStatusInput: TypeGraphqlClass = {
-  name: 'ChatMessageStatusInput',
+const channelMessageStatusInput: TypeGraphqlClass = {
+  name: 'ChannelMessageStatusInput',
   graphqlType: GraphqlType.InputType,
-  path: 'src/services/chats/types/classes/ChatMessageStatusInput.ts',
+  path: 'src/services/channels/types/classes/ChannelMessageStatusInput.ts',
   active: true,
   attributes: [
     { name: 'userId', dataType: 'id' },
@@ -13,4 +13,4 @@ const chatMessageStatusInput: TypeGraphqlClass = {
   ]
 }
 
-export default chatMessageStatusInput
+export default channelMessageStatusInput

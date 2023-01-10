@@ -10,14 +10,14 @@ import baseModel from './classes/baseModel.js'
 import baseModelInput from './classes/baseModelInput.js'
 import baseModelMetadata from './classes/baseModelMetadata.js'
 import baseModelMetadataInput from './classes/baseModelMetadataInput.js'
-import chat from './classes/chat.js'
-import chatInput from './classes/chatInput.js'
-import chatMessage from './classes/chatMessage.js'
-import chatMessageStatus from './classes/chatMessageStatus.js'
-import chatMessageStatusInput from './classes/chatMessageStatusInput.js'
-import chatMessageInput from './classes/chatMessageInput.js'
-import chatParticipant from './classes/chatParticipant.js'
-import chatParticipantInput from './classes/chatParticipantInput.js'
+import channel from './classes/channel.js'
+import channelInput from './classes/channelInput.js'
+import channelMessage from './classes/channelMessage.js'
+import channelMessageStatus from './classes/channelMessageStatus.js'
+import channelMessageStatusInput from './classes/channelMessageStatusInput.js'
+import channelMessageInput from './classes/channelMessageInput.js'
+import channelParticipant from './classes/channelParticipant.js'
+import channelParticipantInput from './classes/channelParticipantInput.js'
 import company from './classes/company.js'
 import companyInput from './classes/companyInput.js'
 import entrepreneursGroupMember from './classes/entrepreneursGroupMember.js'
@@ -33,6 +33,12 @@ import groupRuleBaseConfigInput from './classes/groupRuleBaseConfigInput.js'
 import groupRuleInput from './classes/groupRuleInput.js'
 import mentorsGroupMember from './classes/mentorsGroupMember.js'
 import modelEvent from './classes/modelEvent.js'
+import nonMemberInfo from './classes/nonMemberInfo.js'
+import nonMemberInfoInput from './classes/nonMemberInfoInput.js'
+import notification from './classes/notification.js'
+import notificationInput from './classes/notificationInput.js'
+import notificationTemplate from './classes/notificationTemplate.js'
+import notificationTemplateInput from './classes/notificationTemplateInput.js'
 import user from './classes/user.js'
 import userDevice from './classes/userDevice.js'
 import userDeviceInput from './classes/userDeviceInput.js'
@@ -42,8 +48,8 @@ import userMetadata from './classes/userMetadata.js'
 import userMetadataInput from './classes/userMetadataInput.js'
 import userPreferences from './classes/userPreferences.js'
 import userPreferencesInput from './classes/userPreferencesInput.js'
-import UserSignInInput from './classes/userSignInInput.js'
-import UserSignUpInput from './classes/userSignUpInput.js'
+import userSignInInput from './classes/userSignInInput.js'
+import userSignUpInput from './classes/userSignUpInput.js'
 
 const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
   taskType: TaskType.SYNC_TYPE_GRAPHQL_CLASS,
@@ -59,18 +65,18 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     baseModelInput,
     baseModelMetadata,
     baseModelMetadataInput,
-    chat,
-    chatInput,
-    chatMessage,
-    chatMessageStatus,
-    chatMessageStatusInput,
-    chatMessageInput,
-    chatParticipant,
-    chatParticipantInput,
+    channel,
+    channelInput,
+    channelMessage,
+    channelMessageInput,
+    channelMessageStatus,
+    channelMessageStatusInput,
+    channelParticipant,
+    channelParticipantInput,
     company,
     companyInput,
-    expertise,
     entrepreneursGroupMember,
+    expertise,
     findObjectsOptions,
     group,
     groupInput,
@@ -82,6 +88,12 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     groupRuleInput,
     mentorsGroupMember,
     modelEvent,
+    nonMemberInfo,
+    nonMemberInfoInput,
+    notification,
+    notificationInput,
+    notificationTemplate,
+    notificationTemplateInput,
     user,
     userDevice,
     userDeviceInput,
@@ -91,8 +103,8 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     userMetadataInput,
     userPreferences,
     userPreferencesInput,
-    UserSignInInput,
-    UserSignUpInput,
+    userSignInInput,
+    userSignUpInput,
   ],
 }
 

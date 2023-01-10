@@ -5,7 +5,7 @@ const UserSignUpInput: TypeGraphqlClass = {
   name: 'UserSignUpInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: 'src/services/accounts/types/classes/UserSignUpInput.ts',
+  path: 'src/services/secureId/types/classes/UserSignUpInput.ts',
   active: true,
   attributes: [
     { name: 'firstName', dataType: 'string' },

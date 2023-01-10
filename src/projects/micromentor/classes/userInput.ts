@@ -15,6 +15,8 @@ const userInput: TypeGraphqlClass = {
     { name: 'phoneNumberUpdatedAt', dataType: 'date', optional: true },
     { name: 'isPhoneNumberVerified', dataType: 'boolean', default: 'false' },
     { name: 'email', dataType: 'string' },
+    { name: 'addToGroupIds', dataType: 'string[]' },
+    { name: 'removeFromGroupIds', dataType: 'string[]' },
     { name: 'emailUpdatedAt', dataType: 'date', optional: true },
     { name: 'isEmailVerified', dataType: 'boolean', default: 'false' },
     { name: 'gender', dataType: 'string' },

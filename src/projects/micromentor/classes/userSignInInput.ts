@@ -4,7 +4,7 @@ import { GraphqlType } from '../../../enums.js'
 const userSignInInput: TypeGraphqlClass = {
   name: 'UserSignUpInput',
   graphqlType: GraphqlType.InputType,
-  path: 'src/services/accounts/types/classes/UserSignInInput.ts',
+  path: 'src/services/secureId/types/classes/UserSignInInput.ts',
   active: true,
   attributes: [
     { name: 'ident', dataType: 'string' },
