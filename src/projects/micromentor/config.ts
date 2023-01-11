@@ -39,6 +39,8 @@ import notification from './classes/notification.js'
 import notificationInput from './classes/notificationInput.js'
 import notificationTemplate from './classes/notificationTemplate.js'
 import notificationTemplateInput from './classes/notificationTemplateInput.js'
+import secureIdUser from './classes/secureIdUser.js'
+import secureIdUserInput from './classes/secureIdUserInput.js'
 import user from './classes/user.js'
 import userDevice from './classes/userDevice.js'
 import userDeviceInput from './classes/userDeviceInput.js'
@@ -94,6 +96,8 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     notificationInput,
     notificationTemplate,
     notificationTemplateInput,
+    secureIdUser,
+    secureIdUserInput,
     user,
     userDevice,
     userDeviceInput,

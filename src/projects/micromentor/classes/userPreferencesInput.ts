@@ -5,7 +5,7 @@ const userPreferencesInput: TypeGraphqlClass = {
   name: 'UserPreferencesInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: 'src/services/accounts/types/classes/UserPreferencesInput.ts',
+  path: 'src/services/secureId/types/classes/UserPreferencesInput.ts',
   active: true,
   attributes: [
     { name: 'shareEmail', dataType: 'boolean', optional: true },
