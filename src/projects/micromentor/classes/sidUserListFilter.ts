@@ -2,12 +2,13 @@ import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
 const userListFilter: TypeGraphqlClass = {
-  name: 'UserListFilter',
+  name: 'SidUserListFilter',
   graphqlType: GraphqlType.InputType,
-  extends: 'SidUserListFilter',
-  path: 'src/services/accounts/types/classes/UserListFilter.ts',
+  extends: 'BaseListFilter',
+  path: 'src/services/secureId/types/classes/SidUserListFilter.ts',
   active: true,
   attributes: [
+    { name: 'roles', dataType: 'UserRole[]' }
   ]
 }
 

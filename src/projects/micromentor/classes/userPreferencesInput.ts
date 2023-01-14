@@ -4,13 +4,10 @@ import { GraphqlType } from '../../../enums.js'
 const userPreferencesInput: TypeGraphqlClass = {
   name: 'UserPreferencesInput',
   graphqlType: GraphqlType.InputType,
-  extends: 'BaseModelInput',
-  path: 'src/services/secureId/types/classes/UserPreferencesInput.ts',
+  extends: 'SidUserPreferencesInput',
+  path: 'src/services/accounts/types/classes/UserPreferencesInput.ts',
   active: true,
   attributes: [
-    { name: 'shareEmail', dataType: 'boolean', optional: true },
-    { name: 'sharePhoneNumber', dataType: 'boolean', optional: true },
-    { name: 'showWelcomeMessage', dataType: 'boolean', optional: true },
   ]
 }
 

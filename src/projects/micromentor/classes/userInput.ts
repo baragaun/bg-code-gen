@@ -4,7 +4,7 @@ import { GraphqlType } from '../../../enums.js'
 const userInput: TypeGraphqlClass = {
   name: 'UserInput',
   graphqlType: GraphqlType.InputType,
-  extends: 'SecureIdUserInput',
+  extends: 'SidUserInput',
   path: 'src/services/accounts/types/classes/UserInput.ts',
   active: true,
   attributes: [
@@ -12,11 +12,11 @@ const userInput: TypeGraphqlClass = {
     { name: 'removeFromGroupIds', dataType: 'string[]' },
     { name: 'companyId', dataType: 'id' },
     { name: 'groupIds', dataType: 'id[]', default: '[]' },
-    { name: 'groups', dataType: 'GroupMemberInput[]', default: '[]' },
+    { name: 'groupMembers', dataType: 'GroupMemberInput[]', default: '[]' },
     { name: 'preferredLanguage', dataType: 'string' },
     { name: 'spokenLanguages', dataType: 'string[]', default: '[]' },
-    { name: 'isEntrepreneur', dataType: 'boolean', default: 'false' },
-    { name: 'isMentor', dataType: 'boolean', default: 'false' },
+    { name: 'seeksHelp', dataType: 'boolean', default: 'false' },
+    { name: 'offersHelp', dataType: 'boolean', default: 'false' },
     { name: 'metadata', dataType: 'UserMetadataInput', optional: true },
   ]
 }

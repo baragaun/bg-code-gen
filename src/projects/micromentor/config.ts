@@ -5,6 +5,8 @@ import {
 import { TaskType } from '../../enums.js'
 import appliedGroupRule from './classes/appliedGroupRule.js'
 import appliedGroupRuleInput from './classes/appliedGroupRuleInput.js'
+import asyncTask from './classes/asyncTask.js'
+import asyncTaskInput from './classes/asyncTaskInput.js'
 import baseListFilter from './classes/baseListFilter.js'
 import baseModel from './classes/baseModel.js'
 import baseModelInput from './classes/baseModelInput.js'
@@ -13,9 +15,9 @@ import baseModelMetadataInput from './classes/baseModelMetadataInput.js'
 import channel from './classes/channel.js'
 import channelInput from './classes/channelInput.js'
 import channelMessage from './classes/channelMessage.js'
+import channelMessageInput from './classes/channelMessageInput.js'
 import channelMessageStatus from './classes/channelMessageStatus.js'
 import channelMessageStatusInput from './classes/channelMessageStatusInput.js'
-import channelMessageInput from './classes/channelMessageInput.js'
 import channelParticipant from './classes/channelParticipant.js'
 import channelParticipantInput from './classes/channelParticipantInput.js'
 import company from './classes/company.js'
@@ -39,11 +41,18 @@ import notification from './classes/notification.js'
 import notificationInput from './classes/notificationInput.js'
 import notificationTemplate from './classes/notificationTemplate.js'
 import notificationTemplateInput from './classes/notificationTemplateInput.js'
-import secureIdUser from './classes/secureIdUser.js'
-import secureIdUserInput from './classes/secureIdUserInput.js'
+import sidUser from './classes/sidUser.js'
+import sidUserDevice from './classes/sidUserDevice.js'
+import sidUserDeviceInput from './classes/sidUserDeviceInput.js'
+import sidUserDeviceListFilter from './classes/sidUserDeviceListFilter.js'
+import sidUserInput from './classes/sidUserInput.js'
+import sidUserListFilter from './classes/sidUserListFilter.js'
+import sidUserPreferences from './classes/sidUserPreferences.js'
+import sidUserPreferencesInput from './classes/sidUserPreferencesInput.js'
 import user from './classes/user.js'
 import userDevice from './classes/userDevice.js'
 import userDeviceInput from './classes/userDeviceInput.js'
+import userDeviceListFilter from './classes/userDeviceListFilter.js'
 import userInput from './classes/userInput.js'
 import userListFilter from './classes/userListFilter.js'
 import userMetadata from './classes/userMetadata.js'
@@ -62,6 +71,8 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
   classes: [
     appliedGroupRule,
     appliedGroupRuleInput,
+    asyncTask,
+    asyncTaskInput,
     baseListFilter,
     baseModel,
     baseModelInput,
@@ -96,11 +107,18 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     notificationInput,
     notificationTemplate,
     notificationTemplateInput,
-    secureIdUser,
-    secureIdUserInput,
+    sidUser,
+    sidUserDevice,
+    sidUserDeviceInput,
+    sidUserDeviceListFilter,
+    sidUserInput,
+    sidUserListFilter,
+    sidUserPreferences,
+    sidUserPreferencesInput,
     user,
     userDevice,
     userDeviceInput,
+    userDeviceListFilter,
     userInput,
     userListFilter,
     userMetadata,

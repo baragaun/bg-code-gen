@@ -1,11 +1,11 @@
 import { TypeGraphqlClass } from '../../../types.js'
 import { GraphqlType } from '../../../enums.js'
 
-const secureIdUserInput: TypeGraphqlClass = {
-  name: 'SecureIdUserInput',
+const sidUserInput: TypeGraphqlClass = {
+  name: 'SidUserInput',
   graphqlType: GraphqlType.InputType,
   extends: 'BaseModelInput',
-  path: 'src/services/secureId/types/classes/SecureIdUserInput.ts',
+  path: 'src/services/secureId/types/classes/SidUserInput.ts',
   active: true,
   attributes: [
     { name: 'firstName', dataType: 'string' },
@@ -39,4 +39,4 @@ const secureIdUserInput: TypeGraphqlClass = {
   ]
 }
 
-export default secureIdUserInput
+export default sidUserInput

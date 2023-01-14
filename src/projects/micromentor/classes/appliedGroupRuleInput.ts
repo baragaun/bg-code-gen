@@ -4,7 +4,7 @@ import { GraphqlType } from '../../../enums.js'
 const appliedGroupRuleInput: TypeGraphqlClass = {
   name: 'AppliedGroupRuleInput',
   graphqlType: GraphqlType.InputType,
-  extends: 'BaseModel',
+  extends: 'BaseModelInput',
   path: 'src/services/groups/types/classes/AppliedGroupRuleInput.ts',
   active: true,
   attributes: [
