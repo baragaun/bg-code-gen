@@ -49,7 +49,9 @@ import sidUserInput from './classes/sidUserInput.js'
 import sidUserListFilter from './classes/sidUserListFilter.js'
 import sidUserPreferences from './classes/sidUserPreferences.js'
 import sidUserPreferencesInput from './classes/sidUserPreferencesInput.js'
+import systemHealthReport from './classes/systemHealthReport.js'
 import user from './classes/user.js'
+import userAuthResponse from './classes/userAuthResponse.js'
 import userDevice from './classes/userDevice.js'
 import userDeviceInput from './classes/userDeviceInput.js'
 import userDeviceListFilter from './classes/userDeviceListFilter.js'
@@ -115,7 +117,9 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     sidUserListFilter,
     sidUserPreferences,
     sidUserPreferencesInput,
+    systemHealthReport,
     user,
+    userAuthResponse,
     userDevice,
     userDeviceInput,
     userDeviceListFilter,

@@ -8,6 +8,7 @@ const userSignInInput: TypeGraphqlClass = {
   active: true,
   attributes: [
     { name: 'ident', dataType: 'string' },
+    { name: 'identType', dataType: 'UserIdentType' },
     { name: 'deviceUuid', dataType: 'string' },
     { name: 'password', dataType: 'string' },
   ]
