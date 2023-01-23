@@ -9,11 +9,11 @@ const notification: TypeGraphqlClass = {
   active: true,
   attributes: [
     { name: 'templateId', dataType: 'id' },
+    { name: 'templateName', dataType: 'id' },
     { name: 'toUserId', dataType: 'id' },
     { name: 'asyncTaskId', dataType: 'id' },
     { name: 'initiatorId', dataType: 'id' },
     { name: 'replyingToId', dataType: 'id' },
-    { name: 'templateName', dataType: 'string' },
     { name: 'title', dataType: 'string' },
     { name: 'messageText', dataType: 'string' },
     { name: 'shortMessageText', dataType: 'string' },
