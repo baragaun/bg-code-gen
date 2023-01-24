@@ -33,17 +33,8 @@ import notification from './classes/notification.js'
 import notificationInput from './classes/notificationInput.js'
 import notificationTemplate from './classes/notificationTemplate.js'
 import notificationTemplateInput from './classes/notificationTemplateInput.js'
-import sidUser from './classes/sidUser.js'
-import sidUserDevice from './classes/sidUserDevice.js'
-import sidUserDeviceInput from './classes/sidUserDeviceInput.js'
-import sidUserDeviceListFilter from './classes/sidUserDeviceListFilter.js'
-import sidUserInput from './classes/sidUserInput.js'
-import sidUserListFilter from './classes/sidUserListFilter.js'
-import sidUserPreferences from './classes/sidUserPreferences.js'
-import sidUserPreferencesInput from './classes/sidUserPreferencesInput.js'
 import systemHealthReport from './classes/systemHealthReport.js'
 import user from './classes/user.js'
-import userAuthResponse from './classes/userAuthResponse.js'
 import userDevice from './classes/userDevice.js'
 import userDeviceInput from './classes/userDeviceInput.js'
 import userDeviceListFilter from './classes/userDeviceListFilter.js'
@@ -53,8 +44,6 @@ import userMetadata from './classes/userMetadata.js'
 import userMetadataInput from './classes/userMetadataInput.js'
 import userPreferences from './classes/userPreferences.js'
 import userPreferencesInput from './classes/userPreferencesInput.js'
-import userSignInInput from './classes/userSignInInput.js'
-import userSignUpInput from './classes/userSignUpInput.js'
 
 const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
   taskType: TaskType.SYNC_TYPE_GRAPHQL_CLASS,
@@ -93,17 +82,8 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     notificationInput,
     notificationTemplate,
     notificationTemplateInput,
-    sidUser,
-    sidUserDevice,
-    sidUserDeviceInput,
-    sidUserDeviceListFilter,
-    sidUserInput,
-    sidUserListFilter,
-    sidUserPreferences,
-    sidUserPreferencesInput,
     systemHealthReport,
     user,
-    userAuthResponse,
     userDevice,
     userDeviceInput,
     userDeviceListFilter,
@@ -113,8 +93,6 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     userMetadataInput,
     userPreferences,
     userPreferencesInput,
-    userSignInInput,
-    userSignUpInput,
   ],
 }
 

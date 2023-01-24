@@ -10,14 +10,6 @@ import baseModel from './classes/baseModel.js'
 import baseModelInput from './classes/baseModelInput.js'
 import baseModelMetadata from './classes/baseModelMetadata.js'
 import baseModelMetadataInput from './classes/baseModelMetadataInput.js'
-import channel from './classes/channel.js'
-import channelInput from './classes/channelInput.js'
-import channelMessage from './classes/channelMessage.js'
-import channelMessageInput from './classes/channelMessageInput.js'
-import channelMessageStatus from './classes/channelMessageStatus.js'
-import channelMessageStatusInput from './classes/channelMessageStatusInput.js'
-import channelParticipant from './classes/channelParticipant.js'
-import channelParticipantInput from './classes/channelParticipantInput.js'
 import company from './classes/company.js'
 import companyInput from './classes/companyInput.js'
 import findObjectsOptions from './classes/findObjectsOptions.js'
@@ -28,17 +20,8 @@ import notification from './classes/notification.js'
 import notificationInput from './classes/notificationInput.js'
 import notificationTemplate from './classes/notificationTemplate.js'
 import notificationTemplateInput from './classes/notificationTemplateInput.js'
-import sidUser from './classes/sidUser.js'
-import sidUserDevice from './classes/sidUserDevice.js'
-import sidUserDeviceInput from './classes/sidUserDeviceInput.js'
-import sidUserDeviceListFilter from './classes/sidUserDeviceListFilter.js'
-import sidUserInput from './classes/sidUserInput.js'
-import sidUserListFilter from './classes/sidUserListFilter.js'
-import sidUserPreferences from './classes/sidUserPreferences.js'
-import sidUserPreferencesInput from './classes/sidUserPreferencesInput.js'
 import systemHealthReport from './classes/systemHealthReport.js'
 import user from './classes/user.js'
-import userAuthResponse from './classes/userAuthResponse.js'
 import userDevice from './classes/userDevice.js'
 import userDeviceInput from './classes/userDeviceInput.js'
 import userDeviceListFilter from './classes/userDeviceListFilter.js'
@@ -48,8 +31,6 @@ import userMetadata from './classes/userMetadata.js'
 import userMetadataInput from './classes/userMetadataInput.js'
 import userPreferences from './classes/userPreferences.js'
 import userPreferencesInput from './classes/userPreferencesInput.js'
-import userSignInInput from './classes/userSignInInput.js'
-import userSignUpInput from './classes/userSignUpInput.js'
 
 const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
   taskType: TaskType.SYNC_TYPE_GRAPHQL_CLASS,
@@ -64,14 +45,6 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     baseModelInput,
     baseModelMetadata,
     baseModelMetadataInput,
-    channel,
-    channelInput,
-    channelMessage,
-    channelMessageInput,
-    channelMessageStatus,
-    channelMessageStatusInput,
-    channelParticipant,
-    channelParticipantInput,
     company,
     companyInput,
     findObjectsOptions,
@@ -82,17 +55,8 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     notificationInput,
     notificationTemplate,
     notificationTemplateInput,
-    sidUser,
-    sidUserDevice,
-    sidUserDeviceInput,
-    sidUserDeviceListFilter,
-    sidUserInput,
-    sidUserListFilter,
-    sidUserPreferences,
-    sidUserPreferencesInput,
     systemHealthReport,
     user,
-    userAuthResponse,
     userDevice,
     userDeviceInput,
     userDeviceListFilter,
@@ -102,8 +66,6 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     userMetadataInput,
     userPreferences,
     userPreferencesInput,
-    userSignInInput,
-    userSignUpInput,
   ],
 }
 
