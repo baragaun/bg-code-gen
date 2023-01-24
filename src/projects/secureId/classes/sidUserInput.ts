@@ -8,9 +8,8 @@ const sidUserInput: TypeGraphqlClass = {
   path: 'src/services/secureId/types/classes/SidUserInput.ts',
   active: true,
   attributes: [
-    { name: 'firstName', dataType: 'string' },
-    { name: 'lastName', dataType: 'string' },
-    { name: 'username', dataType: 'string' },
+    { name: 'fullName', dataType: 'string' },
+    { name: 'userHandle', dataType: 'string' },
     { name: 'phoneNumber', dataType: 'string' },
     { name: 'phoneNumberUpdatedAt', dataType: 'date', optional: true },
     { name: 'isPhoneNumberVerified', dataType: 'boolean', default: 'false' },

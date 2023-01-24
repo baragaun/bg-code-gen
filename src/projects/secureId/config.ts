@@ -17,7 +17,7 @@ import userSignUpInput from './classes/userSignUpInput.js'
 
 const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
   taskType: TaskType.SYNC_TYPE_GRAPHQL_CLASS,
-  projectRoot: '../quark_server',
+  projectRoot: '../secureid-service',
   mongoDbCollectionsPath: '/src/services/db/mongoDb/helpers/collections.ts',
   active: true,
   classes: [
