@@ -9,8 +9,8 @@ const channel: TypeGraphqlClass = {
   dbCollectionName: 'channels',
   active: true,
   attributes: [
-    { name: 'channelType', dataType: 'ChannelType', default: 'ChannelType.NOT_SET' },
-    { name: 'channelStatus', dataType: 'ChannelStatus', default: 'ChannelStatus.NOT_SET' },
+    { name: 'channelType', dataType: 'ChannelType', default: 'ChannelType.unset' },
+    { name: 'channelStatus', dataType: 'ChannelStatus', default: 'ChannelStatus.unset' },
     { name: 'pausedAt', dataType: 'date', optional: true },
     { name: 'archivedAt', dataType: 'date', optional: true },
   ]

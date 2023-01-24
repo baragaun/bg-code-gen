@@ -3,8 +3,6 @@ import {
   TypeGraphqlTask,
 } from '../../types.js'
 import { TaskType } from '../../enums.js'
-import appliedGroupRule from './classes/appliedGroupRule.js'
-import appliedGroupRuleInput from './classes/appliedGroupRuleInput.js'
 import asyncTask from './classes/asyncTask.js'
 import asyncTaskInput from './classes/asyncTaskInput.js'
 import baseListFilter from './classes/baseListFilter.js'
@@ -12,20 +10,17 @@ import baseModel from './classes/baseModel.js'
 import baseModelInput from './classes/baseModelInput.js'
 import baseModelMetadata from './classes/baseModelMetadata.js'
 import baseModelMetadataInput from './classes/baseModelMetadataInput.js'
+import channel from './classes/channel.js'
+import channelInput from './classes/channelInput.js'
+import channelMessage from './classes/channelMessage.js'
+import channelMessageInput from './classes/channelMessageInput.js'
+import channelMessageStatus from './classes/channelMessageStatus.js'
+import channelMessageStatusInput from './classes/channelMessageStatusInput.js'
+import channelParticipant from './classes/channelParticipant.js'
+import channelParticipantInput from './classes/channelParticipantInput.js'
 import company from './classes/company.js'
 import companyInput from './classes/companyInput.js'
-import entrepreneursGroupMember from './classes/entrepreneursGroupMember.js'
-import expertise from './classes/expertise.js'
 import findObjectsOptions from './classes/findObjectsOptions.js'
-import group from './classes/group.js'
-import groupInput from './classes/groupInput.js'
-import groupMember from './classes/groupMember.js'
-import groupMemberInput from './classes/groupMemberInput.js'
-import groupRule from './classes/groupRule.js'
-import groupRuleBaseConfig from './classes/groupRuleBaseConfig.js'
-import groupRuleBaseConfigInput from './classes/groupRuleBaseConfigInput.js'
-import groupRuleInput from './classes/groupRuleInput.js'
-import mentorsGroupMember from './classes/mentorsGroupMember.js'
 import modelEvent from './classes/modelEvent.js'
 import nonMemberInfo from './classes/nonMemberInfo.js'
 import nonMemberInfoInput from './classes/nonMemberInfoInput.js'
@@ -58,13 +53,10 @@ import userSignUpInput from './classes/userSignUpInput.js'
 
 const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
   taskType: TaskType.SYNC_TYPE_GRAPHQL_CLASS,
-  // projectRoot: '../../micromentor/mm-backend-core',
-  projectRoot: '../mm-backend-core',
+  projectRoot: '../quark_server',
   mongoDbCollectionsPath: '/src/services/db/mongoDb/helpers/collections.ts',
   active: true,
   classes: [
-    appliedGroupRule,
-    appliedGroupRuleInput,
     asyncTask,
     asyncTaskInput,
     baseListFilter,
@@ -72,20 +64,17 @@ const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
     baseModelInput,
     baseModelMetadata,
     baseModelMetadataInput,
+    channel,
+    channelInput,
+    channelMessage,
+    channelMessageInput,
+    channelMessageStatus,
+    channelMessageStatusInput,
+    channelParticipant,
+    channelParticipantInput,
     company,
     companyInput,
-    entrepreneursGroupMember,
-    expertise,
     findObjectsOptions,
-    group,
-    groupInput,
-    groupMember,
-    groupMemberInput,
-    groupRule,
-    groupRuleBaseConfig,
-    groupRuleBaseConfigInput,
-    groupRuleInput,
-    mentorsGroupMember,
     modelEvent,
     nonMemberInfo,
     nonMemberInfoInput,

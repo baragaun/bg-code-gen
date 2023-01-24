@@ -12,7 +12,7 @@ const channelMessage: TypeGraphqlClass = {
     { name: 'channelId', dataType: 'id' },
     { name: 'userId', dataType: 'id' },
     { name: 'replyToMessageId', dataType: 'id' },
-    { name: 'channelMessageType', dataType: 'ChannelMessageType', default: 'ChannelMessageType.NOT_SET' },
+    { name: 'channelMessageType', dataType: 'ChannelMessageType', default: 'ChannelMessageType.unset' },
     { name: 'messageText', dataType: 'string' },
     { name: 'statuses', dataType: 'ChannelMessageStatus[]', default: '[]' },
   ]
