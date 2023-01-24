@@ -9,6 +9,8 @@ const sidUser: TypeGraphqlClass = {
   dbCollectionName: 'users',
   active: true,
   attributes: [
+    { name: 'firstName', dataType: 'string' },
+    { name: 'lastName', dataType: 'string' },
     { name: 'fullName', dataType: 'string' },
     { name: 'userHandle', dataType: 'string' },
     { name: 'phoneNumber', dataType: 'string' },

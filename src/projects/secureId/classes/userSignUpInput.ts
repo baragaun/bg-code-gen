@@ -10,7 +10,8 @@ const UserSignUpInput: TypeGraphqlClass = {
   attributes: [
     { name: 'firstName', dataType: 'string' },
     { name: 'lastName', dataType: 'string' },
-    { name: 'username', dataType: 'string' },
+    { name: 'fullName', dataType: 'string' },
+    { name: 'userHandle', dataType: 'string' },
     { name: 'email', dataType: 'string' },
     { name: 'phoneNumber', dataType: 'string' },
     { name: 'password', dataType: 'string' },
