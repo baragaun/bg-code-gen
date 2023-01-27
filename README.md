@@ -8,6 +8,8 @@ First copy your project into `src/projects`. Then run it with:
 
     ts-node src/projects/<project-name>/index.ts
 
+See the [sample-project](./src/sample-project) for a sample project setup.
+
 ## Tasks
 
 ### [TypeGraphqlTask](src/tasks/typeGraphqlTask/index.ts)
@@ -51,6 +53,5 @@ Instead of defining its attributes right in the class, define them in a `TypeGra
       ]
     }
 
-Then run the `TypeGraphqlTask` to generate the attributes in the model. See the 
-[sample-project](./src/sample-project) for a sample project setup. 
+Then run the `TypeGraphqlTask` to generate the attributes in the model. 
 

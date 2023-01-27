@@ -12,7 +12,7 @@ const animal: TypeGraphqlClass = {
     { name: 'species', dataType: 'string' },
     { name: 'subSpecies', dataType: 'string' },
     { name: 'family', dataType: 'string' },
-    { name: 'familyname', dataType: 'string' },
+    { name: 'family', dataType: 'string' },
     { name: 'discoveredAt', dataType: 'date', optional: true },
     { name: 'extinctSince', dataType: 'date', optional: true },
   ]
