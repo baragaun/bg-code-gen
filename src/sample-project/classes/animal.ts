@@ -9,12 +9,8 @@ const animal: TypeGraphqlClass = {
   dbCollectionName: 'animals',
   active: true,
   attributes: [
+    { name: 'name', dataType: 'string' },
     { name: 'species', dataType: 'string' },
-    { name: 'subSpecies', dataType: 'string' },
-    { name: 'family', dataType: 'string' },
-    { name: 'family', dataType: 'string' },
-    { name: 'discoveredAt', dataType: 'date', optional: true },
-    { name: 'extinctSince', dataType: 'date', optional: true },
   ]
 }
 

@@ -44,14 +44,39 @@ Instead of defining its attributes right in the class, define them in a `TypeGra
       dbCollectionName: 'animals',
       active: true,
       attributes: [
+        { name: 'name', dataType: 'string' },
         { name: 'species', dataType: 'string' },
-        { name: 'subSpecies', dataType: 'string' },
-        { name: 'family', dataType: 'string' },
-        { name: 'familyname', dataType: 'string' },
-        { name: 'discoveredAt', dataType: 'date', optional: true },
-        { name: 'extinctSince', dataType: 'date', optional: true },
       ]
     }
 
-Then run the `TypeGraphqlTask` to generate the attributes in the model. 
+Then run the `TypeGraphqlTask` to generate the attributes in the model. This will fill
+the attributes into the model:
+
+    @ObjectType()
+    export class Animal {
+      // @bg-codegen:class.attr
+      @Field(_type => String)
+      public name = ''
+
+      @Field(_type => String)
+      public species = ''
+      // @bg-codegen:/class.attr
+
+      constructor(attributes?: Partial<User>) {
+        super(attributes)
+
+        if (attributes) {
+          // @bg-codegen:class.const.attr
+          if (attributes.name) {
+            this.name = attributes.name
+          }
+          if (attributes.species) {
+            this.species = attributes.species
+          }
+          // @bg-codegen:/class.const.attr
+        }
+      }
+    }
+
+
 
