@@ -16,6 +16,10 @@ const getGqlType = (attr: TypeGraphqlAttr, isInputType: boolean): string => {
     s = isInputType ? 'String' : 'Date'
   }
 
+  if (attr.dataType.startsWith('float')) {
+    s = 'Float'
+  }
+
   if (attr.dataType.startsWith('integer')) {
     s = 'Int'
   }
@@ -59,7 +63,7 @@ const getTypescriptType = (attr: TypeGraphqlAttr, isInputType: boolean): string 
   if (s.startsWith('date')) {
     s = 'Date'
     orNull = isInputType
-  } else if (s.startsWith('integer')) {
+  } else if (s.startsWith('integer') || s.startsWith('float')) {
     s = 'number'
   } else if (s.startsWith('id')) {
     s = 'string'
