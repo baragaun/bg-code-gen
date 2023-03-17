@@ -141,10 +141,12 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     )
     let gqlOptional = isOptional ? ', { nullable: true }' : ''
 
-    // GraphQL @Field tag:
-    lines.push(prefix + `@Field(_type => ${getGqlType(attr, isInputType)}${gqlOptional})`)
-    if (isOptional) {
-      lines.push(prefix + '@IsOptional()')
+    if (attr.exposeToGraphQl !== false) {
+      // GraphQL @Field tag:
+      lines.push(prefix + `@Field(_type => ${getGqlType(attr, isInputType)}${gqlOptional})`)
+      if (isOptional) {
+        lines.push(prefix + '@IsOptional()')
+      }
     }
 
     // Variable declaration:

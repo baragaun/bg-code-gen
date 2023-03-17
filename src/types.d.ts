@@ -6,6 +6,7 @@ export interface TypeGraphqlAttr {
   gqlType?: string
   default?: string
   optional?: boolean
+  exposeToGraphQl?: boolean
 }
 
 export interface TypeGraphqlClass {
