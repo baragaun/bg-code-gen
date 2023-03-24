@@ -132,6 +132,9 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
   lines.push(prefix + '// @bg-codegen:class.attr >>Note: Code is generated between these markers<<')
 
   for (const attr of config.attributes) {
+    if (attr.comment) {
+      lines.push(prefix + attr.comment)
+    }
     let isOptional = (
       (
         (isInputType && !attr.default) ||
@@ -144,7 +147,7 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     if (attr.exposeToGraphQl !== false) {
       // GraphQL @Field tag:
       lines.push(prefix + `@Field(_type => ${getGqlType(attr, isInputType)}${gqlOptional})`)
-      if (isOptional) {
+      if (isOptional || attr.addOptionalDecorator) {
         lines.push(prefix + '@IsOptional()')
       }
     }
