@@ -144,7 +144,7 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     )
     let gqlOptional = isOptional ? ', { nullable: true }' : ''
 
-    if (attr.exposeToGraphQl !== false) {
+    if (config.graphqlType && attr.exposeToGraphQl !== false) {
       // GraphQL @Field tag:
       lines.push(prefix + `@Field(_type => ${getGqlType(attr, isInputType)}${gqlOptional})`)
       if (isOptional || attr.addOptionalDecorator) {
@@ -155,9 +155,9 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     // Variable declaration:
     const typescriptText = getTypescriptTypeText(attr, isInputType, isOptional)
     const defaultText = getDefaultText(attr, isOptional)
-    lines.push(prefix + `public ${attr.name}${typescriptText}${defaultText}\n`)
+    lines.push(prefix + `public ${attr.name}${typescriptText}${defaultText}` + (config.graphqlType ? "\n" : ''))
   }
-  if (config.attributes.length > 0) {
+  if (config.graphqlType && config.attributes.length > 0) {
     // Removing the double new line of the last attribute:
     lines[lines.length - 1] = lines[lines.length - 1].substring(0, lines[lines.length - 1].length - 1)
   }

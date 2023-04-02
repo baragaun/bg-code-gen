@@ -44,6 +44,7 @@
   "dependencies": {
     "command-line-args": "^5.2.1",
     "find": "^0.3.0",
-    "fs-extra": "^11.1.0"
+    "fs-extra": "^11.1.0",
+    "sync-directory": "^6.0.4"
   }
 }
