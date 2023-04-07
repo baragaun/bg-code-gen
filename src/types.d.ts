@@ -8,6 +8,7 @@ export interface TypeGraphqlAttr {
   optional?: boolean
   addOptionalDecorator?: boolean
   exposeToGraphQl?: boolean
+  orNull?: boolean
   comment?: string
 }
 

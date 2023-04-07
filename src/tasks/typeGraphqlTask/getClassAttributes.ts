@@ -82,7 +82,12 @@ const getTypescriptType = (attr: TypeGraphqlAttr, isInputType: boolean): string 
   return s
 }
 
-const getTypescriptTypeText = (attr: TypeGraphqlAttr, isInputType: boolean, isOptional: boolean): string => {
+const getTypescriptTypeText = (
+  attr: TypeGraphqlAttr,
+  isInputType: boolean,
+  isOptional: boolean,
+  orNull: boolean,
+): string => {
   if (
     (attr.dataType === 'string' || attr.dataType === 'id') &&
     !isOptional
@@ -99,7 +104,11 @@ const getTypescriptTypeText = (attr: TypeGraphqlAttr, isInputType: boolean, isOp
     return ''
   }
 
-  const typeScriptType = getTypescriptType(attr, isInputType)
+  let typeScriptType = getTypescriptType(attr, isInputType)
+
+  if (orNull) {
+    typeScriptType += ' | null'
+  }
 
   return (
     (isOptional ?  '?:' : ':') +
@@ -144,6 +153,8 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     )
     let gqlOptional = isOptional ? ', { nullable: true }' : ''
 
+    const orNull = !!(attr.orNull && isOptional)
+
     if (config.graphqlType && attr.exposeToGraphQl !== false) {
       // GraphQL @Field tag:
       lines.push(prefix + `@Field(_type => ${getGqlType(attr, isInputType)}${gqlOptional})`)
@@ -153,7 +164,7 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     }
 
     // Variable declaration:
-    const typescriptText = getTypescriptTypeText(attr, isInputType, isOptional)
+    const typescriptText = getTypescriptTypeText(attr, isInputType, isOptional, orNull)
     const defaultText = getDefaultText(attr, isOptional)
     lines.push(prefix + `public ${attr.name}${typescriptText}${defaultText}` + (config.graphqlType ? "\n" : ''))
   }
