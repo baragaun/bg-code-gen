@@ -7,12 +7,21 @@ const getAttributeOverwrites = (config: TypeGraphqlClass, indentLevel: number): 
   lines.push(prefix + '// @bg-codegen:class.const.attr >>Note: Code is generated between these markers<<')
 
   for (const attr of config.attributes) {
-    if (attr.dataType === 'boolean') {
+    if (attr.dataType.toLowerCase() === 'boolean') {
       lines.push(prefix + `if (attributes.${attr.name} === true || attributes.${attr.name} === false) {`)
     } else {
       lines.push(prefix + `if (attributes.${attr.name}) {`)
     }
-    lines.push(prefix + `  this.${attr.name} = attributes.${attr.name}`)
+
+    if (attr.dataType.toLowerCase() === 'date') {
+      lines.push(prefix + `  if (attributes.${attr.name} instanceof Date) {`)
+      lines.push(prefix + `    this.${attr.name} = attributes.${attr.name}`)
+      lines.push(prefix + `  } else {`)
+      lines.push(prefix + `    this.${attr.name} = new Date(attributes.${attr.name})`)
+      lines.push(prefix + `  }`)
+    } else {
+      lines.push(prefix + `  this.${attr.name} = attributes.${attr.name}`)
+    }
     lines.push(prefix + `}`)
   }
 
