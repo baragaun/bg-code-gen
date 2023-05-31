@@ -10,6 +10,7 @@ export interface TypeGraphqlAttr {
   exposeToGraphQl?: boolean
   orNull?: boolean
   comment?: string
+  description?: string
 }
 
 export interface TypeGraphqlClass {
