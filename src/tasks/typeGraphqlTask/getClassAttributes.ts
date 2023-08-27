@@ -13,7 +13,7 @@ const getGqlType = (attr: TypeGraphqlAttr, isInputType: boolean): string => {
   }
 
   if (attr.dataType.startsWith('date')) {
-    s = isInputType ? 'String' : 'Date'
+    s = isInputType ? 'Date' : 'Date'
   }
 
   if (attr.dataType.startsWith('float')) {
@@ -54,7 +54,6 @@ const primitiveDataTypes = [
 
 const getTypescriptType = (attr: TypeGraphqlAttr, isInputType: boolean): string => {
   let s = attr.dataType
-  let orNull = false
 
   if (s === 'date' && isInputType) {
     return 'Date | string | null'
@@ -62,7 +61,6 @@ const getTypescriptType = (attr: TypeGraphqlAttr, isInputType: boolean): string 
 
   if (s.startsWith('date')) {
     s = 'Date'
-    orNull = isInputType
   } else if (s.startsWith('integer') || s.startsWith('float')) {
     s = 'number'
   } else if (s.startsWith('id')) {
@@ -75,8 +73,20 @@ const getTypescriptType = (attr: TypeGraphqlAttr, isInputType: boolean): string 
     s += '[]'
   }
 
-  if (orNull) {
+  if (
+    (attr.orNull || attr.optional || isInputType) &&
+    attr.orNull !== false &&
+    attr.optional !== false
+  ) {
     s += ' | null'
+  } else {
+    if (
+        (attr.dataType === 'string' || attr.dataType === 'id') &&
+        (attr.default || !attr.optional) &&
+        (!isInputType || attr.optional === false)
+      ) {
+        return ''
+      }
   }
 
   return s
@@ -86,15 +96,7 @@ const getTypescriptTypeText = (
   attr: TypeGraphqlAttr,
   isInputType: boolean,
   isOptional: boolean,
-  orNull: boolean,
 ): string => {
-  if (
-    (attr.dataType === 'string' || attr.dataType === 'id') &&
-    !isOptional
-  ) {
-    return ''
-  }
-
   if (
     primitiveDataTypes.includes(attr.dataType) &&
     attr.default &&
@@ -106,8 +108,8 @@ const getTypescriptTypeText = (
 
   let typeScriptType = getTypescriptType(attr, isInputType)
 
-  if (orNull) {
-    typeScriptType += ' | null'
+  if (!typeScriptType) {
+    return ''
   }
 
   return (
@@ -167,8 +169,6 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
       ? `, {\n${prefix}${prefix}${fieldDecoratorOptions.join(`,\n${prefix}${prefix}`)},\n${prefix}}`
       : ''
 
-    const orNull = !!(attr.orNull && isOptional)
-
     if (config.graphqlType && attr.exposeToGraphQl !== false) {
       // GraphQL @Field tag:
       lines.push(prefix + `@Field(_type => ${getGqlType(attr, isInputType)}${fieldDecoratorOptionsArg})`)
@@ -178,7 +178,7 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     }
 
     // Variable declaration:
-    const typescriptText = getTypescriptTypeText(attr, isInputType, isOptional, orNull)
+    const typescriptText = getTypescriptTypeText(attr, isInputType, isOptional)
     const defaultText = getDefaultText(attr, isOptional)
     lines.push(prefix + `public ${attr.name}${typescriptText}${defaultText}` + (config.graphqlType ? "\n" : ''))
   }
