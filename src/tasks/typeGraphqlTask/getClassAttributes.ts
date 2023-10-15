@@ -101,7 +101,8 @@ const getTypescriptTypeText = (
     primitiveDataTypes.includes(attr.dataType) &&
     attr.default &&
     attr.default !== '' &&
-    !isOptional
+    !isOptional &&
+    !attr.orNull
   ) {
     return ''
   }

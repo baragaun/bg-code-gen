@@ -15,13 +15,13 @@ export interface TypeGraphqlAttr {
 
 export interface TypeGraphqlClass {
   name: string
-  active?: boolean
+  active?: boolean | null
   graphqlType?: GraphqlType
-  extends?: string
-  path?: string
-  dbCollectionName?: string
+  extends?: string | null
+  path?: string | null
+  dbCollectionName?: string | null
   attributes: TypeGraphqlAttr[]
-  backUpFiles?: boolean
+  backUpFiles?: boolean | null
 }
 
 abstract interface BgCodeGenTask {
