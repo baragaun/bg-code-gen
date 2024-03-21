@@ -15,6 +15,7 @@ export interface TypeGraphqlAttr {
 
 export interface TypeGraphqlClass {
   name: string
+  description?: string
   active?: boolean | null
   graphqlType?: GraphqlType
   extends?: string | null
