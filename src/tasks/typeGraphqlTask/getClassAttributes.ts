@@ -147,7 +147,19 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
     const fieldDecoratorOptions: string[] = []
 
     if (attr.comment) {
-      lines.push(prefix + attr.comment)
+      if (attr.comment.startsWith('//')) {
+        lines.push(prefix + attr.comment)
+      } else {
+        lines.push(prefix + '// ' + attr.comment)
+      }
+    }
+
+    if (config.isTypeOrmModel !== false && !isInputType) {
+      if (attr.isPrimaryKeyField) {
+        lines.push(prefix + '@ObjectIdColumn()')
+      } else {
+        lines.push(prefix + '@Column()')
+      }
     }
 
     let isOptional = (
