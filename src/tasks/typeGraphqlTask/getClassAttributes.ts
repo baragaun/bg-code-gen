@@ -154,7 +154,7 @@ const getClassAttributes = (config: TypeGraphqlClass, indentLevel: number): stri
       }
     }
 
-    if (config.isTypeOrmModel !== false && !isInputType) {
+    if (config.isTypeOrmModel && !isInputType) {
       if (attr.isPrimaryKeyField) {
         lines.push(prefix + '@ObjectIdColumn()')
       } else {
