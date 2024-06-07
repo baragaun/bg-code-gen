@@ -78,5 +78,39 @@ the attributes into the model:
       }
     }
 
+## Using With mmdata
 
+Follow these steps:
 
+* Create directory `bg-code-gen/src/projects/mmdata`
+* Add the following scripts to this directory:
+
+`bg-code-gen/src/projects/mmdata/copy-project.sh`:
+
+```shell
+#!/usr/bin/env bash
+
+if [[ "$MMDATA_ROOT" = "" ]]; then
+  mmDataRoot="../mmdata"
+else
+  mmDataRoot="$MMDATA_ROOT"
+fi
+
+rsync -avP --delete "$mmDataRoot/tools/bg-code-gen/" "./src/projects/mmdata/"
+```
+
+You may want to adjust the `MMDATA_ROOT` environment variable, or edit `mmDataRoot` directly
+in this script. It should point to the root of the `mmdata` sources.
+
+`bg-code-gen/src/projects/mmdata/run-project.sh`:
+
+```shell
+#!/usr/bin/env bash
+
+. ./src/projects/mmdata/copy-project.sh
+node --loader ts-node/esm ./src/projects/mmdata/index.ts
+```
+
+* Execute `src/projects/mmdata/run-project.sh`
+
+That should run the code generator and shape your models inside `mmdata`.
