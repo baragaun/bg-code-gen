@@ -5,7 +5,7 @@ import readFileIntoSections from '../../helpers/readFileIntoSections.js'
 import getClassAttributes from './getClassAttributes.js'
 import getAttributeOverwrites from './getAttributeOverwrites.js'
 
-const syncTypeGraphqlClass = async (task: TypeGraphqlTask, classIndex: number): Promise<number> => {
+const doModel = async (task: TypeGraphqlTask, classIndex: number): Promise<number> => {
   const graphqlClass: TypeGraphqlClass = task.classes[classIndex]
   if (!graphqlClass.path) {
     return 0
@@ -42,4 +42,4 @@ const syncTypeGraphqlClass = async (task: TypeGraphqlTask, classIndex: number): 
   return 0
 }
 
-export default syncTypeGraphqlClass
+export default doModel

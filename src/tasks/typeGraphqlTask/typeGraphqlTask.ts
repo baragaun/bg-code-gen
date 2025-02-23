@@ -1,11 +1,11 @@
 import { TypeGraphqlTask } from '../../types.js'
-import syncTypeGraphqlClass from './syncTypeGraphqlClass.js'
+import doModel from './doModel.js'
 
 const doNextClass = async (task: TypeGraphqlTask, classIndex: number): Promise<number> => {
   let result = 0
   if (task.classes[classIndex].active && task.classes[classIndex].path) {
     console.log(`syncing class ${task.classes[classIndex].name}`)
-    result = await syncTypeGraphqlClass(task, classIndex)
+    result = await doModel(task, classIndex)
   } else {
     console.log(`skipping class ${task.classes[classIndex].name}`)
   }

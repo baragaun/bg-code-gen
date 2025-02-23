@@ -1,14 +1,20 @@
-import { BgCodeGenProject, TypeGraphqlTask } from './types.js'
+import { BgCodeGenProject, JsonSchemaTask, TypeGraphqlTask } from './types.js'
 import { TaskType } from './enums.js'
-import runTypeGraphqlTask from './tasks/typeGraphqlTask/index.js'
+import runTypeGraphqlTask from './tasks/typeGraphqlTask/typeGraphqlTask.js'
+import runCreateSchemaTask from './tasks/jsonSchemaTask/jsonSchemaTask.js'
 
-const doNextTask = async (config: BgCodeGenProject, taskIndex: number): Promise<number> => {
+const doNextTask = async (
+  config: BgCodeGenProject,
+  taskIndex: number,
+): Promise<number> => {
   const task = config.tasks[taskIndex]
   let result = 0
 
   if (task.active) {
-    if (task.taskType === TaskType.SYNC_TYPE_GRAPHQL_CLASS) {
+    if (task.taskType === TaskType.typeGraphql) {
       result = await runTypeGraphqlTask(task as TypeGraphqlTask)
+    } else if (task.taskType === TaskType.jsonSchema) {
+      result = await runCreateSchemaTask(task as JsonSchemaTask)
     }
   }
 

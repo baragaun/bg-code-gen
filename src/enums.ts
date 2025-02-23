@@ -1,5 +1,6 @@
 export enum TaskType {
-  SYNC_TYPE_GRAPHQL_CLASS = 'sync-type-graphql-class',
+  typeGraphql = 'type-graphql',
+  jsonSchema = 'json-schema',
 }
 
 export enum GraphqlType {

@@ -6,7 +6,7 @@ import { TaskType } from '../enums.js'
 import animal from './classes/animal.js'
 
 const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
-  taskType: TaskType.SYNC_TYPE_GRAPHQL_CLASS,
+  taskType: TaskType.typeGraphql,
   projectRoot: '../sample-mother-project',
   mongoDbCollectionsPath: '/src/services/db/mongoDb/helpers/collections.ts',
   active: true,
