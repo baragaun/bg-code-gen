@@ -28,6 +28,10 @@ const getGqlType = (attr: TypeGraphqlAttr, isInputType: boolean): string => {
     s = 'String'
   }
 
+  if (attr.dataType.startsWith('long')) {
+    s = 'GraphQlLong'
+  }
+
   if (attr.dataType.startsWith('id')) {
     // todo: should this here be 'ID'?
     s = 'ID'
@@ -65,6 +69,8 @@ const getTypescriptType = (attr: TypeGraphqlAttr, isInputType: boolean): string 
     s = 'number'
   } else if (s.startsWith('id')) {
     s = 'string'
+  } else if (s.startsWith('long') || s.startsWith('GraphQlLong')) {
+    s = 'number'
   // } else {
   //   return attr.dataType
   }
