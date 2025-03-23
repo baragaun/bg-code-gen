@@ -93,7 +93,10 @@ const convertPropDefToProperty = (
     return prop;
   }
 
-  if (propDef.dataType.toLowerCase() === 'integer') {
+  if (
+    propDef.dataType.toLowerCase() === 'integer' ||
+    propDef.dataType.toLowerCase() === 'long'
+  ) {
     prop.type = 'integer';
 
     return prop;
