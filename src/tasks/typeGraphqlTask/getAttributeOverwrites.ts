@@ -8,7 +8,7 @@ const getAttributeOverwrites = (config: TypeGraphqlClass, indentLevel: number): 
 
   for (const attr of config.attributes) {
     if (attr.dataType.toLowerCase() === 'boolean') {
-      lines.push(prefix + `if (attributes.${attr.name} === true || attributes.${attr.name} === false) {`)
+      lines.push(prefix + `if (attributes.${attr.name} !== undefined) {`)
     } else if (attr.dataType.toLowerCase() === 'float' || attr.dataType.toLowerCase() === 'integer') {
       lines.push(prefix + `if (`)
       lines.push(prefix + `  attributes.${attr.name} === 0 ||`)
