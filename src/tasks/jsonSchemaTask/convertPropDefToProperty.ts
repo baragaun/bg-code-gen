@@ -3,57 +3,70 @@ import getPropertiesForModelDef from './getPropertiesForModelDef.js'
 
 const convertPropDefToProperty = (
   propDef: TypeGraphqlAttr,
+  nestedModelNames: string[],
   task: JsonSchemaTask,
 ): any | null => {
-  const prop: any = {};
-
   if (propDef.schema?.skip) {
     return null;
   }
+
+  const prop: any = {
+    name: propDef.name,
+    type: propDef.schema?.type || propDef.dataType,
+  };
 
   if (propDef.description) {
     prop.description = propDef.description;
   }
 
-  if (propDef.schema) {
-    if (propDef.schema.type === 'object') {
-      prop.type = 'object';
+  const isArray = propDef.dataType.endsWith('[]');
+  const dataType = isArray
+    ? propDef.dataType.substring(0, propDef.dataType.length - 2)
+    : propDef.dataType;
+  if (isArray) {
+    prop.type = 'array';
+  }
 
-      if (propDef.schema.modelType) {
-        const modelDef = task.models
-          .find(m => m.name === propDef.schema?.modelType);
-        if (modelDef) {
-          prop.properties = getPropertiesForModelDef(modelDef, task);
-        }
-      }
+  if (Array.isArray(task.enumInfos) && task.enumInfos.length > 0) {
+    const enumInfo = task.enumInfos.find(e => e.name === dataType);
 
-      return prop;
+    if (enumInfo) {
+      prop.type = 'string';
+      prop.enum = enumInfo.values;
+      prop.enumType = enumInfo.name;
     }
+  }
 
-    if (propDef.schema.type === 'array' && propDef.schema.arrayItemType === 'object') {
-      prop.type = 'array';
+  const referencedModelDef = task.modelDefs
+    .find(m => m.name === dataType);
+
+  if (referencedModelDef) {
+    prop.type = isArray ? 'array' : 'object';
+    if (isArray) {
       prop.items = {
         type: 'object',
       };
-      const itemModelDef = task.models
-        .find(m => m.name === propDef.schema?.arrayItemObject || m.name === propDef.dataType);
-
-      if (itemModelDef) {
-        prop.items.properties = getPropertiesForModelDef(itemModelDef, task);
-      }
-
-      return prop;
+    }
+    prop.properties = getPropertiesForModelDef(referencedModelDef, nestedModelNames, task);
+    if (prop.properties === null) {
+      return null;
     }
   }
 
   if (
-    propDef.dataType.toLowerCase() === 'string' ||
-    propDef.dataType.toLowerCase() === 'id'
+    dataType.toLowerCase() === 'string' ||
+    dataType.toLowerCase() === 'id'
   ) {
-    prop.type = 'string';
+    if (isArray) {
+      prop.items = {
+        type: 'string',
+      };
+    } else {
+      prop.type = 'string';
+    }
 
     let maxLength = propDef.maxLength
-    if (!maxLength && propDef.dataType.toLowerCase() === 'id') {
+    if (!maxLength && dataType.toLowerCase() === 'id') {
       // ee3b6cab23204e79a203f9504128c748
       maxLength = 32;
     }
@@ -65,52 +78,70 @@ const convertPropDefToProperty = (
     return prop;
   }
 
-  if (
-    propDef.dataType.toLowerCase() === 'string[]' ||
-    propDef.dataType.toLowerCase() === 'id[]'
-  ) {
-    prop.type = 'array';
-    prop.items = {
-      type: 'string',
-    };
-
-    let maxLength = propDef.maxLength
-    if (!maxLength && propDef.dataType.toLowerCase() === 'id[]') {
-      // ee3b6cab23204e79a203f9504128c748
-      maxLength = 32;
-    }
-
-    if (maxLength) {
-      prop.items.maxLength = maxLength;
+  if (dataType.toLowerCase() === 'boolean') {
+    if (isArray) {
+      prop.items = {
+        type: 'boolean',
+      };
+    } else {
+      prop.type = 'boolean';
     }
 
     return prop;
   }
 
-  if (propDef.dataType.toLowerCase() === 'boolean') {
-    prop.type = 'boolean';
+  if (dataType.toLowerCase() === 'date') {
+    if (isArray) {
+      prop.items = {
+        type: 'string',
+        format: 'string',
+      };
+    } else {
+      prop.type = 'string';
+      prop.format = 'date-time';
+    }
+
+    return prop;
+  }
+
+  if (dataType.toLowerCase() === 'float') {
+    if (isArray) {
+      prop.items = {
+        type: 'number',
+      };
+    } else {
+      prop.type = 'number';
+    }
 
     return prop;
   }
 
   if (
-    propDef.dataType.toLowerCase() === 'integer' ||
-    propDef.dataType.toLowerCase() === 'long'
+    dataType.toLowerCase() === 'integer' ||
+    dataType.toLowerCase() === 'long'
   ) {
-    prop.type = 'integer';
+    if (isArray) {
+      prop.items = {
+        type: 'integer',
+      };
+    } else {
+      prop.type = 'integer';
+    }
 
     return prop;
   }
 
-  if (propDef.dataType.toLowerCase() === 'float' || propDef.dataType.toLowerCase() === 'integer') {
-    prop.type = 'number';
-
-    return prop;
-  }
-
-  if (propDef.dataType.toLowerCase() === 'date') {
-    prop.type = 'string';
-    prop.format = 'date-time';
+  if (
+    dataType.toLowerCase() === 'json' ||
+    dataType.toLowerCase() === 'object'
+  ) {
+    if (isArray) {
+      prop.items = {
+        type: 'object',
+      };
+    } else {
+      prop.type = 'object';
+    }
 
     return prop;
   }

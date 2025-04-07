@@ -1,24 +1,24 @@
-import {
-  BgCodeGenProject,
-  TypeGraphqlTask,
-} from '../types.js'
-import { TaskType } from '../enums.js'
-import animal from './classes/animal.js'
+import { BgCodeGenProject, TypeGraphqlTask } from '../types.js';
+import { TaskType } from '../enums.js';
+import animal from './classes/animal.js';
 
-const syncTypeGraphqlClassesTask: TypeGraphqlTask = {
+const typeGraphqlTask: TypeGraphqlTask = {
   taskType: TaskType.typeGraphql,
-  projectRoot: '../sample-mother-project',
-  mongoDbCollectionsPath: '/src/services/db/mongoDb/helpers/collections.ts',
-  active: true,
-  classes: [
-    animal,
-  ],
+  enabled: true,
+  modelDefs: [animal],
 }
 
 const config: BgCodeGenProject = {
+  sourceProjects: [
+    {
+      name: 'sample',
+      rootPath: './sample-project',
+      // jsonSchemaPath: './sample-project/models/schema',
+    },
+  ],
   tasks: [
-    syncTypeGraphqlClassesTask,
-  ]
-}
+    typeGraphqlTask,
+  ],
+};
 
 export default config

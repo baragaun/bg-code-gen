@@ -34,9 +34,9 @@ Given a model class with the `@ObjectType` decorator:
       }
     }
 
-Instead of defining its attributes right in the class, define them in a `TypeGraphqlClass` object:
+Instead of defining its attributes right in the class, define them in a `BgModelDef` object:
 
-    const animal: TypeGraphqlClass = {
+    const animal: BgModelDef = {
       name: 'Animal',
       graphqlType: GraphqlType.ObjectType,
       extends: 'BaseModel',
