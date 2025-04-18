@@ -5,27 +5,26 @@ import convertPropDefToProperty from './convertPropDefToProperty.js'
 const getPropertiesForModelDef = (
   modelDef: BgModelDef,
   nestedModelNames: string[],
+  level: number,
   task: JsonSchemaTask,
-): any | null => {
+): string[] => {
   const nestedMatchingNames = nestedModelNames.filter(name => name === modelDef.name)
   if (nestedMatchingNames.length > 1) {
-    return null;
+    return [];
   }
   nestedModelNames.push(modelDef.name);
 
   const propDefs = getPropertyDefsForModelDef(modelDef, task);
 
   if (!Array.isArray(propDefs) || propDefs.length < 1) {
-    return null;
+    return [];
   }
 
-  const properties: any = {};
+  const properties: string[] = [];
   for (const attr of propDefs.filter(d => !d.schema?.skip)) {
-    const prop = convertPropDefToProperty(attr, nestedModelNames, task);
+    const prop = convertPropDefToProperty(attr, nestedModelNames, level, task);
     if (prop) {
-      const { name } = prop;
-      delete prop.name;
-      properties[name] = prop;
+      properties.push(prop);
     }
   }
 

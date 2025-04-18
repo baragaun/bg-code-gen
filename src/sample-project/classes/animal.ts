@@ -1,13 +1,13 @@
-import { TypeGraphqlClass } from '../../types.js'
+import { BgModelDef } from '../../types.js'
 import { GraphqlType } from '../../enums.js'
 
-const animal: TypeGraphqlClass = {
+const animal: BgModelDef = {
+  sourceProject: 'sample-project',
   name: 'Animal',
   graphqlType: GraphqlType.ObjectType,
   extends: 'BaseModel',
-  path: 'src/services/zoo/types/classes/Animal.ts',
+  classFilePath: 'src/services/zoo/types/classes/Animal.ts',
   dbCollectionName: 'animals',
-  active: true,
   attributes: [
     { name: 'name', dataType: 'string' },
     { name: 'species', dataType: 'string' },
