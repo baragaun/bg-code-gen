@@ -190,6 +190,10 @@ const getClassAttributes = (config: BgModelDef, indentLevel: number): string[] =
       fieldDecoratorOptions.push(`description: '${attr.description}'`)
     }
 
+    if (attr.deprecationReason) {
+      fieldDecoratorOptions.push(`deprecationReason: '${attr.deprecationReason}'`)
+    }
+
     const fieldDecoratorOptionsArg = fieldDecoratorOptions.length > 0
       ? `, {\n${prefix}${prefix}${fieldDecoratorOptions.join(`,\n${prefix}${prefix}`)},\n${prefix}}`
       : ''

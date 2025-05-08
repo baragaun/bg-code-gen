@@ -14,7 +14,7 @@ export const getEnumsFromGraphqlSchema = (schema: GraphQLSchema): EnumInfo[] => 
   const typeMap = schema.getTypeMap();
   const enums: EnumInfo[] = [];
 
-  Object.values(typeMap).forEach((type) => {
+  Object.values(typeMap).forEach((type: any) => {
     // Skip built-in types (they start with "__")
     if (type.name.startsWith('__')) {
       return;
@@ -23,7 +23,7 @@ export const getEnumsFromGraphqlSchema = (schema: GraphQLSchema): EnumInfo[] => 
     // Check if the type is an enum
     if (type instanceof GraphQLEnumType) {
       const enumType = type as GraphQLEnumType;
-      const enumValues = enumType.getValues().map(value => value.name);
+      const enumValues = enumType.getValues().map((value: any): any => value.name);
 
       enums.push({
         name: enumType.name,

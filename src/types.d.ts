@@ -37,6 +37,7 @@ export interface TypeGraphqlAttr {
   maxLength?: number
   comment?: string
   description?: string
+  deprecationReason?: string
   schema?: {
     type?: SchemaType
     modelType?: SchemaType

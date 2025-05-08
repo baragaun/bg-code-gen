@@ -29,7 +29,7 @@ export const GraphQlLong = new GraphQLScalarType({
     throw new Error(`GraphQlLong can't parse value: ${value}`);
   },
 
-  parseLiteral(ast): Long {
+  parseLiteral(ast: any): Long {
     if (ast.kind === Kind.STRING) {
       return Long.fromString(ast.value);
     }
