@@ -22,7 +22,7 @@ export const GraphQlObjectId = new GraphQLScalarType({
     throw new Error(`GraphQlObjectId can't parse value: ${value}`);
   },
 
-  parseLiteral(ast): ObjectId {
+  parseLiteral(ast: any): ObjectId {
     if (ast.kind === Kind.STRING) {
       return new ObjectId(ast.value);
     }
