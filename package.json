@@ -1,6 +1,6 @@
 {
   "name": "bg-code-gen",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Baragaun code generator",
   "main": "dist/index.js",
   "repository": "git@github.com:baragaun/bg-code-gen.git",

@@ -15,13 +15,7 @@ const doModel = async (
   if (
     // Input types don't need a schema:
     modelDef.graphqlType === GraphqlType.InputType ||
-    // Only models with a collection are included in schema building
-    // !modelDef.dbCollectionName ||
-    (
-      // This is a parent class, skipping it
-      task.modelDefs.some(m => m.extends === modelDef.name) &&
-      !modelDef.generateJsonSchema
-    )
+    !modelDef.generateJsonSchema
   ) {
     // console.log(`skipping parent class ${modelDef.name}`);
     return 0;
@@ -41,7 +35,7 @@ const doModel = async (
 
   const basename = modelDef.name.substring(0, 1).toLowerCase() + modelDef.name.substring(1);
   const outPaths = sourceProjects
-    .map(project => `${project.rootPath}/${project.jsonSchemaPath}/${basename}.${fileExtension}`)
+    .map(project => `${project.rootPath}/${project.jsonSchemaPath}/${basename}Schema.${fileExtension}`)
     .filter(outPath => outPath);
 
   if (!Array.isArray(outPaths) || outPaths.length < 1) {
@@ -52,8 +46,9 @@ const doModel = async (
     '$schema': 'https://json-schema.org/draft/2020-12/schema',
     '$id': `${task.schemaIdUrl}/${basename}.schema.json`,
     title: modelDef.name,
-    // version: modelDef.version ??  0,
-    // primaryKey: modelDef.primaryKey ??  'id',
+    // @ts-ignore: RxDB custom property 'version', not in standard JSONSchema (and JSONSchema is a type, not an interface)
+    version: modelDef.version ??  0,
+    primaryKey: modelDef.primaryKey ??  'id',
     type: 'object',
     properties: getPropertiesForModelDef(modelDef, [], task),
     required: modelDef.required || ['id']
