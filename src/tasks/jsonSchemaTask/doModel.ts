@@ -15,11 +15,6 @@ const doModel = async (
   if (
     // Input types don't need a schema:
     modelDef.graphqlType === GraphqlType.InputType ||
-    (
-      // This is a parent class, skipping it
-      task.modelDefs.some(m => m.extends === modelDef.name) &&
-      !modelDef.generateJsonSchema
-    ) ||
     !modelDef.generateJsonSchema
   ) {
     // console.log(`skipping parent class ${modelDef.name}`);
