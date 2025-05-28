@@ -43,8 +43,9 @@ const doModel = async (
   }
 
   const schema: JSONSchema = {
-    '$schema': 'https://json-schema.org/draft/2020-12/schema',
-    '$id': `${task.schemaIdUrl}/${basename}.schema.json`,
+    // The following two lines break RxDB:
+    // '$schema': 'https://json-schema.org/draft/2020-12/schema',
+    // '$id': `${task.schemaIdUrl}/${basename}.schema.json`,
     title: modelDef.name,
     // @ts-ignore: RxDB custom property 'version', not in standard JSONSchema (and JSONSchema is a type, not an interface)
     version: modelDef.version ??  0,
