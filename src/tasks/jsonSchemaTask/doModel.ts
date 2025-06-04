@@ -4,6 +4,7 @@ import { type JSONSchema } from 'json-schema-typed';
 import { BgCodeGenProject, BgModelDef, JsonSchemaTask } from '../../types.js';
 import getPropertiesForModelDef from './getPropertiesForModelDef.js';
 import { GraphqlType, SchemaOutputType } from '../../enums.js'
+import { generateTypeScript } from '../../helpers/generateTypeScript/generateTypeScript.js'
 
 const doModel = async (
   task: JsonSchemaTask,
@@ -60,7 +61,10 @@ const doModel = async (
   if (task.outputType === SchemaOutputType.json) {
     outString = JSON.stringify(schema, null, 2);
   } else {
-    outString = `export const ${modelDef.name}Schema = ${JSON.stringify(schema, null, 2)};\n`
+    outString = await generateTypeScript(
+      schema,
+      { varName: `${modelDef.name}Schema`, exportType: 'named' },
+    );
   }
 
   for (const outPath of outPaths) {

@@ -1,4 +1,5 @@
 import { GraphqlType } from './enums.js'
+import * as prettier from 'prettier'
 
 export type DataType = 'string' |
   'integer' |
@@ -19,7 +20,7 @@ export type SchemaType = 'string' |
 
 export interface EnumInfo {
   name: string;
-  values: string[];
+  values: (string | null)[];
   description?: string;
 }
 
@@ -101,6 +102,15 @@ export interface FileSection {
   tag: string;
   indent: number;
   lines: string[];
+}
+
+type ExportType = 'none' | 'named' | 'default';
+
+interface GenerateTypeScriptOptions {
+  varName: string;
+  exportType?: ExportType;
+  prettier?: prettier.Options;
+  filePath?: string;
 }
 
 // // Basic JSON Schema type definitions
