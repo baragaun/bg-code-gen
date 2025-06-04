@@ -33,16 +33,17 @@ const convertPropDefToProperty = (
     if (enumInfo) {
       if (isArray) {
         prop.items = {
-          type: propDef.optional
-            ? `['string', 'null']` :
-            'string',
-          enum: enumInfo.values,
+          // type: propDef.optional
+          //   ? `['string', 'null']` :
+          //   'string',
+          type: 'string',
+          enum: propDef.optional ? enumInfo.values.concat([null]) : enumInfo.values,
           // Adding `enumType` breaks RxDB:
           // enumType: enumInfo.name,
         };
       } else {
         prop.type = 'string';
-        prop.enum = enumInfo.values;
+        prop.enum = propDef.optional ? enumInfo.values.concat([null]) : enumInfo.values;
         // Adding `enumType` breaks RxDB:
         // prop.enumType = enumInfo.name;
       }

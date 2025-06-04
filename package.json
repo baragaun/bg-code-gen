@@ -1,12 +1,13 @@
 {
   "name": "bg-code-gen",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Baragaun code generator",
   "main": "dist/index.js",
   "repository": "git@github.com:baragaun/bg-code-gen.git",
   "license": "MIT",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@8.15.5",
   "scripts": {
     "build": "tsc",
     "lint": "npx eslint --ext .ts src/",
@@ -49,6 +50,7 @@
     "json-schema-typed": "^8.0.1",
     "mongodb": "^6.15.0",
     "node-fetch": "^3.3.2",
+    "prettier": "^3.5.3",
     "sync-directory": "^6.0.4",
     "type-graphql": "^2.0.0-rc.2"
   }
