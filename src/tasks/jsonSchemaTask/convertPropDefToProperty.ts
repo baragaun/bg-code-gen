@@ -33,7 +33,9 @@ const convertPropDefToProperty = (
     if (enumInfo) {
       if (isArray) {
         prop.items = {
-          type: 'string',
+          type: propDef.optional
+            ? `['string', 'null']` :
+            'string',
           enum: enumInfo.values,
           // Adding `enumType` breaks RxDB:
           // enumType: enumInfo.name,
