@@ -11,20 +11,18 @@ export const getTypeScriptType = (
     return 'Date | string | null'
   }
 
-  if (s.toLocaleString().startsWith('date') && useStringForDate) {
+  if (s.match(/^date(\[\])?$/i) && useStringForDate) {
     s = 'string'
-  } else if (s.toLocaleString().startsWith('date') && !useStringForDate) {
+  } else if (s.match(/^date(\[\])?( \| null)?$/i) && !useStringForDate) {
     s = 'Date'
-  } else if (s.toLowerCase().startsWith('integer') || s.startsWith('float')) {
+  } else if (s.match(/^integer(\[\])?( \| null)?$/i) || s.match(/float(\[\])?/i)) {
     s = 'number'
-  } else if (s.toLowerCase().startsWith('id')) {
+  } else if (s.match(/^id(\[\])?( \| null)?$/i)) {
     s = 'string'
-  } else if (s.toLowerCase().startsWith('long') || s.toLowerCase().startsWith('graphqllong')) {
+  } else if (s.match(/^long(\[\])?( \| null)?$/i) || s.match(/graphqllong(\[\])?/i)) {
     s = 'number'
-  } else if (s.toLowerCase().startsWith('json') || s.toLowerCase().startsWith('graphqljson')) {
+  } else if (s.match(/^json(\[\])?( \| null)?$/i) || s.match(/graphqljson(\[\])?/i)) {
     s = 'object'
-  // } else {
-  //   return attr.dataType
   }
 
   if (attr.dataType.endsWith('[]') && !s.endsWith('[]')) {
@@ -40,9 +38,9 @@ export const getTypeScriptType = (
   } else {
     if (
         (
-          attr.dataType.toLowerCase().startsWith('string') ||
-          attr.dataType.toLowerCase().startsWith('id') ||
-          (s.toLocaleString().startsWith('date') && useStringForDate)
+          attr.dataType.toLowerCase() === 'string' ||
+          attr.dataType.toLowerCase() === 'id' ||
+          (s.toLocaleString() === 'date' && useStringForDate)
         ) &&
         (attr.default || !attr.optional) &&
         (!isInputType || attr.optional === false)

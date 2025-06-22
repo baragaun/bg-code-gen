@@ -2,7 +2,8 @@ import {
   BgModelDef,
   ModelClassTask,
   BgModelDefModelClassTaskConfig,
-  BgCodeGenProject
+  BgCodeGenProject,
+  SourceProject
 } from '../../types.js'
 import getAllPropertyDefsForModelDef from '../helpers/getAllPropertyDefsForModelDef.js'
 import { haveCommonTags } from '../helpers/haveCommonTags.js'
@@ -11,6 +12,7 @@ const getAttributeOverwrites = (
   modelDef: BgModelDef,
   task: ModelClassTask,
   modelDefTaskConfig: BgModelDefModelClassTaskConfig,
+  outSourceProject: SourceProject,
   project: BgCodeGenProject,
   indentLevel: number,
 ): string[] => {
@@ -28,6 +30,9 @@ const getAttributeOverwrites = (
     attributes = attributes.filter(attr => !modelDefTaskConfig.removeProps!.includes(attr.name));
   }
 
+  const semiColon = outSourceProject.addSemicolon === undefined || outSourceProject.addSemicolon
+    ? ';'
+    : ''
   for (const attr of attributes) {
     if (attr.dataType.toLowerCase() === 'float' || attr.dataType.toLowerCase() === 'integer') {
       lines.push(prefix + `if (`)
@@ -43,7 +48,7 @@ const getAttributeOverwrites = (
       lines.push(prefix + `if (attributes.${attr.name} !== undefined) {`)
     }
 
-    lines.push(prefix + `  this.${attr.name} = attributes.${attr.name};`)
+    lines.push(prefix + `  this.${attr.name} = attributes.${attr.name}${semiColon}`)
     lines.push(prefix + `}`)
   }
 

@@ -115,6 +115,7 @@ export interface SourceProject {
   name: string;
   rootPath: string;
   enabled?: boolean;
+  addSemicolon?: boolean;
 }
 
 export interface BgCodeGenProject {

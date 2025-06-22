@@ -1,7 +1,9 @@
 import {
   BgModelDef,
   ModelClassTask,
-  BgModelDefModelClassTaskConfig, BgCodeGenProject
+  BgModelDefModelClassTaskConfig,
+  BgCodeGenProject,
+  SourceProject,
 } from '../../types.js'
 import { GraphqlType } from '../../enums.js'
 import getTypeScriptTypeText from './getTypeScriptTypeText.js'
@@ -14,6 +16,7 @@ const getClassAttributes = (
   modelDef: BgModelDef,
   task: ModelClassTask,
   modelDefTaskConfig: BgModelDefModelClassTaskConfig,
+  outSourceProject: SourceProject,
   project: BgCodeGenProject,
   indentLevel: number,
 ): string[] => {
@@ -94,11 +97,16 @@ const getClassAttributes = (
       isOptional,
       !!modelDefTaskConfig.useStringForDate,
     )
-    const declareText = attr.addDeclare ? 'declare ' : ''
+    const declareText = attr.addDeclare
+      ? 'declare '
+      : ''
+    const semiColon = outSourceProject.addSemicolon === undefined || outSourceProject.addSemicolon
+      ? ';'
+      : ''
     const defaultText = getDefaultText(attr, isOptional, modelDefTaskConfig.useStringForDate)
     lines.push(
       prefix +
-      `${declareText}public ${attr.name}${typescriptText}${defaultText};` +
+      `${declareText}public ${attr.name}${typescriptText}${defaultText}${semiColon}` +
       (modelDefTaskConfig.addTypeGraphqlDecorators && modelDef.graphqlType ? "\n" : ''),
     )
   }

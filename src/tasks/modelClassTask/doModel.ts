@@ -77,6 +77,7 @@ const doModel = async (
           modelDef,
           task,
           modelDefTaskConfig,
+          outSourceProject,
           project,
           section.indent,
         ))
@@ -85,6 +86,7 @@ const doModel = async (
           modelDef,
           task,
           modelDefTaskConfig,
+          outSourceProject,
           project,
           section.indent,
         ))
