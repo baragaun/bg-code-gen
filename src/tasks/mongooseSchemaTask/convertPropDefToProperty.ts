@@ -1,11 +1,18 @@
-import { JsonSchemaTask, TypeGraphqlAttr } from '../../types.js'
+import {
+  BgCodeGenProject,
+  BgModelDefTaskConfig,
+  JsonSchemaTask,
+  ModelPropDef
+} from '../../types.js'
 import getPropertiesForModelDef from './getPropertiesForModelDef.js'
 
 const convertPropDefToProperty = (
-  propDef: TypeGraphqlAttr,
+  propDef: ModelPropDef,
   nestedModelNames: string[],
   level: number,
   task: JsonSchemaTask,
+  modelTaskConfig: BgModelDefTaskConfig,
+  project: BgCodeGenProject,
 ): string => {
   if (propDef.schema?.skip || propDef.name === 'id') {
     return '';
@@ -39,7 +46,14 @@ const convertPropDefToProperty = (
     .find(m => m.name === dataType);
 
   if (referencedModelDef) {
-    const nestedProperties = getPropertiesForModelDef(referencedModelDef, nestedModelNames, level + 1, task);
+    const nestedProperties = getPropertiesForModelDef(
+      referencedModelDef,
+      nestedModelNames,
+      level + 1,
+      task,
+      modelTaskConfig,
+      project,
+    );
     if (nestedProperties && nestedProperties.length > 0) {
       return `${indention}${propDef.name}: {` +
         '\n' +

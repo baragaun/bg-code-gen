@@ -1,6 +1,11 @@
-import { BgCodeGenProject, JsonSchemaTask, MongooseSchemaTask, TypeGraphqlTask } from './types.js'
+import {
+  BgCodeGenProject,
+  JsonSchemaTask,
+  ModelClassTask,
+  MongooseSchemaTask,
+} from './types.js'
 import { TaskType } from './enums.js'
-import runTypeGraphqlTask from './tasks/typeGraphqlTask/typeGraphqlTask.js'
+import runModelClassTask from './tasks/modelClassTask/modelClassTask.js'
 import runJsonSchemaTask from './tasks/jsonSchemaTask/jsonSchemaTask.js'
 import runMongooseSchemaTask from './tasks/mongooseSchemaTask/mongooseSchemaTask.js'
 
@@ -12,8 +17,11 @@ const doNextTask = async (
   let result = 0
 
   if (task.enabled === undefined || task.enabled) {
-    if (task.taskType === TaskType.typeGraphql) {
-      result = await runTypeGraphqlTask(task as TypeGraphqlTask, project);
+    if (
+      task.taskType === TaskType.modelClass ||
+      task.taskType === TaskType.typeGraphql
+    ) {
+      result = await runModelClassTask(task as ModelClassTask, project);
     } else if (task.taskType === TaskType.jsonSchema) {
       result = await runJsonSchemaTask(task as JsonSchemaTask, project);
     } else if (task.taskType === TaskType.mongooseSchema) {
