@@ -32,7 +32,7 @@ const doModel = async (
     .find(p => p.name === modelDef.sourceProject)
 
   if (!sourceProject) {
-    console.error(`Source project "${modelDef.sourceProject}" not found`, { task })
+    console.log(`Source project "${modelDef.sourceProject}" not found`)
     return 0
   }
 
@@ -46,8 +46,7 @@ const doModel = async (
       .find(p => p.name === modelDefTaskConfig.sourceProject)
 
     if (!outSourceProject) {
-      console.error(`Source project "${modelDefTaskConfig.sourceProject}" not found`,
-        { task })
+      console.log(`Source project "${modelDefTaskConfig.sourceProject}" not found`)
       continue;
     }
 
