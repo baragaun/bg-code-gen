@@ -6,7 +6,7 @@ export const haveCommonTags = (
 ): boolean => {
   if (
     (!tags1 && !tags2) ||
-    (!Array.isArray(tags1) && !Array.isArray(tags2)) ||
+    (!tags1 && !tags2) ||
     (!Array.isArray(tags1) && !Array.isArray(tags2)) ||
     ((tags1?.length || 0) < 1 && (tags2?.length || 0) < 1)
   ) {
