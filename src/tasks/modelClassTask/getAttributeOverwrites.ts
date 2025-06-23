@@ -44,6 +44,8 @@ const getAttributeOverwrites = (
       // lines.push(prefix + `if (attributes.${attr.name} === 0 || (attributes.${attr.name} && !isNaN(attributes.${attr.name}))) {`)
       lines.push(prefix + `  )`)
       lines.push(prefix + `) {`)
+    } else if (attr.dataType.toLowerCase() === 'date' && modelDefTaskConfig.useStringForDate) {
+      lines.push(prefix + `if (attributes.${attr.name} !== undefined && attributes.${attr.name} !== '') {`)
     } else {
       lines.push(prefix + `if (attributes.${attr.name} !== undefined) {`)
     }
