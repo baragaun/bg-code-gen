@@ -1,4 +1,4 @@
-import { GraphqlType } from './enums.js'
+import { GraphqlType, TaskType } from './enums.js'
 import * as prettier from 'prettier'
 
 export type DataType = 'string' |
@@ -24,13 +24,14 @@ export interface EnumInfo {
   description?: string;
 }
 
-export interface TypeGraphqlAttr {
+export interface ModelPropDef {
   name: string
   dataType: DataType
   isPrimaryKeyField?: boolean | null
   gqlType?: string
   default?: string
   optional?: boolean
+  addDeclare?: boolean
   addOptionalDecorator?: boolean
   exposeToGraphQl?: boolean
   orNull?: boolean
@@ -46,23 +47,45 @@ export interface TypeGraphqlAttr {
     arrayItemObject?: string
     skip?: boolean
   }
+  tags?: string[]
+}
+
+/** deprecated: Use ModelPropDef instead */
+export type TypeGraphqlAttr = ModelPropDef
+
+export interface BgModelDefTaskConfig {
+  taskType: TaskType;
+  sourceProject: string;
+  path: string;
+  tags?: string[];
+  removeProps?: string[];
+  useStringForDate?: boolean;
+}
+
+export interface BgModelDefModelClassTaskConfig extends BgModelDefTaskConfig {
+  mergeParentClasses?: boolean;
+  addTypeGraphqlDecorators?: boolean;
+}
+
+export interface BgModelDefJsonSchemaTaskConfig extends BgModelDefTaskConfig {
+  outputType?: SchemaOutputType;
 }
 
 export interface BgModelDef {
   name: string;
   description?: string;
   sourceProject: string;
+  tags?: string[];
   version?: number;
   primaryKey?: string;
   graphqlType?: GraphqlType;
   extends?: string | null;
-  classFilePath?: string | null;
+  taskConfigs?: (BgModelDefTaskConfig | BgModelDefModelClassTaskConfig | BgModelDefJsonSchemaTaskConfig)[];
   dbCollectionName?: string | null;
-  attributes: TypeGraphqlAttr[];
+  attributes: ModelPropDef[];
   required?: string[];
   isTypeOrmModel?: boolean | null;
   backUpFiles?: boolean | null;
-  generateJsonSchema?: boolean | null;
 }
 
 abstract interface BgCodeGenTask {
@@ -71,11 +94,14 @@ abstract interface BgCodeGenTask {
   enabled: boolean;
 }
 
-export interface TypeGraphqlTask extends BgCodeGenTask {
+export interface ModelClassTask extends BgCodeGenTask {
+  // enableTypeGraphqlDecorators?: boolean;
 }
 
+/** deprecated: Use ModelClassTask instead */
+export type TypeGraphqlTask = ModelClassTask;
+
 export interface JsonSchemaTask extends BgCodeGenTask {
-  outputType?: SchemaOutputType;
   enumInfos?: EnumInfo[];
   graphqlUrl?: string;
   schemaIdUrl?: string;
@@ -89,13 +115,13 @@ export interface SourceProject {
   name: string;
   rootPath: string;
   enabled?: boolean;
-  jsonSchemaPath?: string;
-  mongooseSchemaPath?: string;
+  addSemicolon?: boolean;
 }
 
 export interface BgCodeGenProject {
   sourceProjects: SourceProject[];
   tasks: BgCodeGenTask[];
+  tags?: string[];
 }
 
 export interface FileSection {

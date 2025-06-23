@@ -1,10 +1,16 @@
 import * as fs from 'fs';
 import { type JSONSchema } from 'json-schema-typed';
 
-import { BgCodeGenProject, BgModelDef, JsonSchemaTask } from '../../types.js';
+import {
+  BgCodeGenProject,
+  BgModelDef,
+  BgModelDefJsonSchemaTaskConfig,
+  JsonSchemaTask
+} from '../../types.js'
 import getPropertiesForModelDef from './getPropertiesForModelDef.js';
 import { GraphqlType, SchemaOutputType } from '../../enums.js'
 import { generateTypeScript } from '../../helpers/generateTypeScript/generateTypeScript.js'
+import { haveCommonTags } from '../helpers/haveCommonTags.js'
 
 const doModel = async (
   task: JsonSchemaTask,
@@ -13,10 +19,37 @@ const doModel = async (
 ): Promise<number> => {
   const modelDef: BgModelDef = task.modelDefs[modelIndex];
 
+  if (!haveCommonTags(project.tags, modelDef.tags)) {
+    return 0
+  }
+
+  if (!Array.isArray(modelDef.taskConfigs) || modelDef.taskConfigs.length < 1) {
+    return 0
+  }
+
+  const taskConfigsForThisTask = modelDef.taskConfigs
+    .filter(tc => tc.taskType === task.taskType)
+
+  if (taskConfigsForThisTask.length < 1) {
+    return 0;
+  }
+
+  const sourceProject = project.sourceProjects
+    .find(p => p.name === modelDef.sourceProject)
+
+  if (!sourceProject) {
+    console.log(`Source project "${modelDef.sourceProject}" not found`)
+    return 0
+  }
+
+  if (sourceProject.enabled !== undefined && !sourceProject.enabled) {
+    console.log(`Skipping "${modelDef.name}".`)
+    return 0
+  }
+
   if (
     // Input types don't need a schema:
-    modelDef.graphqlType === GraphqlType.InputType ||
-    !modelDef.generateJsonSchema
+    modelDef.graphqlType === GraphqlType.InputType
   ) {
     // console.log(`skipping parent class ${modelDef.name}`);
     return 0;
@@ -24,52 +57,46 @@ const doModel = async (
 
   console.log(`json schema for class ${task.modelDefs[modelIndex].name}`)
 
-  const fileExtension = task.outputType === SchemaOutputType.json
-    ? 'json'
-    : 'ts';
+  for (const modelDefTaskConfig of taskConfigsForThisTask) {
+    const outSourceProject = project.sourceProjects
+      .find(p => p.name === modelDefTaskConfig.sourceProject)
 
-  const sourceProjects = project.sourceProjects.filter(p => p.jsonSchemaPath);
+    if (!outSourceProject) {
+      console.log(`Source project "${modelDefTaskConfig.sourceProject}" not found`)
+      continue;
+    }
 
-  if (!Array.isArray(sourceProjects) || sourceProjects.length < 1) {
-    return 0;
-  }
+    const outputType = (modelDefTaskConfig as BgModelDefJsonSchemaTaskConfig).outputType
+    const path = outSourceProject.rootPath
+      ? `${outSourceProject.rootPath}/${modelDefTaskConfig.path}`
+      : modelDefTaskConfig.path;
 
-  const basename = modelDef.name.substring(0, 1).toLowerCase() + modelDef.name.substring(1);
-  const outPaths = sourceProjects
-    .map(project => `${project.rootPath}/${project.jsonSchemaPath}/${basename}Schema.${fileExtension}`)
-    .filter(outPath => outPath);
+    const schema: JSONSchema = {
+      // The following two lines break RxDB:
+      // '$schema': 'https://json-schema.org/draft/2020-12/schema',
+      // '$id': `${task.schemaIdUrl}/${basename}.schema.json`,
+      title: modelDef.name,
+      // @ts-ignore: RxDB custom property 'version', not in standard JSONSchema (and JSONSchema is a type, not an interface)
+      version: modelDef.version ?? 0,
+      primaryKey: modelDef.primaryKey ?? 'id',
+      type: 'object',
+      properties: getPropertiesForModelDef(modelDef, [], task, modelDefTaskConfig, project),
+      required: modelDef.required || ['id']
+    };
 
-  if (!Array.isArray(outPaths) || outPaths.length < 1) {
-    return 0;
-  }
+    let outString: string;
 
-  const schema: JSONSchema = {
-    // The following two lines break RxDB:
-    // '$schema': 'https://json-schema.org/draft/2020-12/schema',
-    // '$id': `${task.schemaIdUrl}/${basename}.schema.json`,
-    title: modelDef.name,
-    // @ts-ignore: RxDB custom property 'version', not in standard JSONSchema (and JSONSchema is a type, not an interface)
-    version: modelDef.version ??  0,
-    primaryKey: modelDef.primaryKey ??  'id',
-    type: 'object',
-    properties: getPropertiesForModelDef(modelDef, [], task),
-    required: modelDef.required || ['id']
-  };
+    if (outputType === SchemaOutputType.json) {
+      outString = JSON.stringify(schema, null, 2);
+    } else {
+      outString = await generateTypeScript(
+        schema,
+        { varName: `${modelDef.name}Schema`, exportType: 'named' },
+      );
+    }
 
-  let outString: string;
-
-  if (task.outputType === SchemaOutputType.json) {
-    outString = JSON.stringify(schema, null, 2);
-  } else {
-    outString = await generateTypeScript(
-      schema,
-      { varName: `${modelDef.name}Schema`, exportType: 'named' },
-    );
-  }
-
-  for (const outPath of outPaths) {
     try {
-      fs.writeFileSync(outPath, outString)
+      fs.writeFileSync(path, outString)
     } catch (error) {
       console.error('jsonSchemaTask.doModel: error writing file', error);
     }
