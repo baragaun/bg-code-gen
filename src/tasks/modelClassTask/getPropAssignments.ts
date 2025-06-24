@@ -8,7 +8,7 @@ import {
 import getAllPropertyDefsForModelDef from '../helpers/getAllPropertyDefsForModelDef.js'
 import { haveCommonTags } from '../helpers/haveCommonTags.js'
 
-const getAttributeOverwrites = (
+const getPropAssignments = (
   modelDef: BgModelDef,
   task: ModelClassTask,
   modelDefTaskConfig: BgModelDefModelClassTaskConfig,
@@ -50,7 +50,13 @@ const getAttributeOverwrites = (
       lines.push(prefix + `if (attributes.${attr.name} !== undefined) {`)
     }
 
-    lines.push(prefix + `  this.${attr.name} = attributes.${attr.name}${semiColon}`)
+    if (attr.dataType.toLowerCase() === 'date' && !modelDefTaskConfig.useStringForDate) {
+      lines.push(prefix + `  this.${attr.name} = attributes.${attr.name} instanceof Date`)
+      lines.push(prefix + `    ? new Date(attributes.${attr.name})`)
+      lines.push(prefix + `    : attributes.${attr.name}${semiColon}`)
+    } else {
+      lines.push(prefix + `  this.${attr.name} = attributes.${attr.name}${semiColon}`)
+    }
     lines.push(prefix + `}`)
   }
 
@@ -59,4 +65,4 @@ const getAttributeOverwrites = (
   return lines
 }
 
-export default getAttributeOverwrites
+export default getPropAssignments
