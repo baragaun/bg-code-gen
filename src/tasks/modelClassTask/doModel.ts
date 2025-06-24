@@ -4,7 +4,7 @@ import { BgCodeGenProject, BgModelDef, ModelClassTask } from '../../types.js'
 import { haveCommonTags } from '../helpers/haveCommonTags.js'
 import readFileIntoSections from '../../helpers/readFileIntoSections.js'
 import getClassAttributes from './getClassAttributes.js'
-import getAttributeOverwrites from './getAttributeOverwrites.js'
+import getPropAssignments from './getPropAssignments.js'
 
 const doModel = async (
   task: ModelClassTask,
@@ -81,7 +81,7 @@ const doModel = async (
           section.indent,
         ))
       } else if (section.tag === '@bg-codegen:class.const.attr') {
-        outLines = outLines.concat(getAttributeOverwrites(
+        outLines = outLines.concat(getPropAssignments(
           modelDef,
           task,
           modelDefTaskConfig,
