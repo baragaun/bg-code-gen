@@ -71,6 +71,10 @@ export interface BgModelDefJsonSchemaTaskConfig extends BgModelDefTaskConfig {
   outputType?: SchemaOutputType;
 }
 
+export interface BgModelDefMongooseSchemaTaskConfig extends BgModelDefTaskConfig {
+  suppressReservedKeysWarning?: boolean;
+}
+
 export interface BgModelDef {
   name: string;
   description?: string;
@@ -80,7 +84,7 @@ export interface BgModelDef {
   primaryKey?: string;
   graphqlType?: GraphqlType;
   extends?: string | null;
-  taskConfigs?: (BgModelDefTaskConfig | BgModelDefModelClassTaskConfig | BgModelDefJsonSchemaTaskConfig)[];
+  taskConfigs?: (BgModelDefTaskConfig | BgModelDefModelClassTaskConfig | BgModelDefJsonSchemaTaskConfig | BgModelDefMongooseSchemaTaskConfig)[];
   dbCollectionName?: string | null;
   attributes: ModelPropDef[];
   required?: string[];
@@ -109,6 +113,7 @@ export interface JsonSchemaTask extends BgCodeGenTask {
 
 export interface MongooseSchemaTask extends BgCodeGenTask {
   enumInfos?: EnumInfo[];
+  suppressReservedKeysWarning?: boolean;
 }
 
 export interface SourceProject {
