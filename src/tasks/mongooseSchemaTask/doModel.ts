@@ -1,6 +1,11 @@
 import * as fs from 'fs';
 
-import { BgCodeGenProject, BgModelDef, JsonSchemaTask } from '../../types.js';
+import {
+  BgCodeGenProject,
+  BgModelDef,
+  BgModelDefMongooseSchemaTaskConfig,
+  MongooseSchemaTask
+} from '../../types.js'
 import getPropertiesForModelDef from './getPropertiesForModelDef.js';
 import { GraphqlType } from '../../enums.js'
 import extractImports from '../../helpers/extractImports.js'
@@ -13,7 +18,7 @@ const { Schema } = mongoose;
 `
 
 const doModel = async (
-  task: JsonSchemaTask,
+  task: MongooseSchemaTask,
   project: BgCodeGenProject,
   modelIndex: number,
 ): Promise<number> => {
@@ -71,7 +76,12 @@ const doModel = async (
     let outString = `export const ${basename}Schema = new Schema({` + '\n';
 
     const props = getPropertiesForModelDef(modelDef, [], 0, task, modelDefTaskConfig, project)
-    outString += props.join(',\n') + ',\n}, { collection: \'' + modelDef.dbCollectionName + '\' });\n';
+    let suppressReservedKeysWarningOption = '';
+    if (task.suppressReservedKeysWarning || (taskConfigsForThisTask as unknown as BgModelDefMongooseSchemaTaskConfig).suppressReservedKeysWarning) {
+      suppressReservedKeysWarningOption = ', suppressReservedKeysWarning: true';
+    }
+    outString += props.join(',\n') + ',\n}, { collection: \'' + modelDef.dbCollectionName + `'${suppressReservedKeysWarningOption} });
+`;
 
     const path = outSourceProject.rootPath
       ? `${outSourceProject.rootPath}/${modelDefTaskConfig.path}`
@@ -87,7 +97,7 @@ const doModel = async (
       }
       fs.writeFileSync(path, header + outString)
     } catch (error) {
-      console.error('jsonSchemaTask.doModel: error writing file', error);
+      console.error('MongooseSchemaTask.doModel: error writing file', error);
     }
   }
 
