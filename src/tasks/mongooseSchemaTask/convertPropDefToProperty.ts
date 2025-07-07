@@ -1,7 +1,7 @@
 import {
   BgCodeGenProject,
   BgModelDefTaskConfig,
-  JsonSchemaTask,
+  MongooseSchemaTask,
   ModelPropDef
 } from '../../types.js'
 import getPropertiesForModelDef from './getPropertiesForModelDef.js'
@@ -10,7 +10,7 @@ const convertPropDefToProperty = (
   propDef: ModelPropDef,
   nestedModelNames: string[],
   level: number,
-  task: JsonSchemaTask,
+  task: MongooseSchemaTask,
   modelTaskConfig: BgModelDefTaskConfig,
   project: BgCodeGenProject,
 ): string => {
