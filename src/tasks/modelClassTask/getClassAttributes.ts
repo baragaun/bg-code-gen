@@ -88,6 +88,14 @@ const getClassAttributes = (
       if (isOptional || attr.addOptionalDecorator) {
         lines.push(prefix + '@IsOptional()')
       }
+      if (attr.dataType.startsWith('string')) {
+        if (attr.minLength && attr.minLength > 0) {
+          lines.push(prefix + `@MinLength(${attr.minLength})`)
+        }
+        if (attr.maxLength && attr.maxLength > 0) {
+          lines.push(prefix + `@MaxLength(${attr.maxLength})`)
+        }
+      }
     }
 
     // Variable declaration:

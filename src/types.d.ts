@@ -36,6 +36,7 @@ export interface ModelPropDef {
   exposeToGraphQl?: boolean
   orNull?: boolean
   isEnum?: boolean
+  minLength?: number
   maxLength?: number
   comment?: string
   description?: string
