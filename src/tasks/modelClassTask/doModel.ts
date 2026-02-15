@@ -32,7 +32,7 @@ const doModel = async (
     .find(p => p.name === modelDef.sourceProject)
 
   if (!sourceProject) {
-    console.log(`Source project "${modelDef.sourceProject}" not found`)
+    // console.log(`Source project "${modelDef.sourceProject}" not found`)
     return 0
   }
 

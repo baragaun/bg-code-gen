@@ -1,0 +1,9 @@
+name: run-code-gen
+description: Run the code generator to hydrate model classes
+
+tags:
+  - tool-call
+
+actions:
+  - name: run
+    description: Run the code generator to hydrate model classes

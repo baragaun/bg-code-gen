@@ -1,0 +1,22 @@
+name: create-list-filter-modeldef
+description: Create a list filter model definition for the code generator
+
+tags:
+  - generate
+
+actions:
+  - name: run
+    description: Create a list filter model definition for the code generator
+    args:
+      - name: projectName
+        type: string
+        description: name of the project (e.g., `mmdata`)
+        required: true
+      - name: serviceName
+        type: string
+        description: name of the service (e.g., `accounts`, `academy`, etc.)
+        required: true
+      - name: modelName
+        type: string
+        description: base name of the model without the `ListFilter` suffix (e.g., `AcyChapter`, `AcyCertificate`)
+        required: true

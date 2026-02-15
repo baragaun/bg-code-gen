@@ -1,0 +1,6 @@
+name: bg-code-gen
+description: "`bg-code-gen` is a code generator that manages the properties of JS classes."
+
+tags:
+  - tools
+  - generators
