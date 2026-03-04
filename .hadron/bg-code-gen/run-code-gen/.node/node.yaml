@@ -1,9 +1,8 @@
-name: run-code-gen
+id: 019ca15613447c29a47df6a6a7525cc6
+name: Run Code Generator
 description: Run the code generator to hydrate model classes
-
 tags:
   - tool-call
-
 actions:
   - name: run
     description: Run the code generator to hydrate model classes
