@@ -55,11 +55,18 @@ const convertPropDefToProperty = (
       project,
     );
     if (nestedProperties && nestedProperties.length > 0) {
-      return `${indention}${propDef.name}: {` +
+      // Array of subdocs vs single embedded subdoc. The previous version
+      // ignored `isArray` here and always emitted a single subdoc, so a
+      // propDef like { dataType: 'Foo[]' } would generate the wrong
+      // Mongoose schema (single embedded object instead of an array of
+      // them) and silently break list operations on the field.
+      const openBrace = isArray ? '[{' : '{';
+      const closeBrace = isArray ? '}]' : '}';
+      return `${indention}${propDef.name}: ${openBrace}` +
         '\n' +
         nestedProperties.join(',\n') +
         ',\n' +
-        indention + '}';
+        indention + closeBrace;
     }
   }
 
