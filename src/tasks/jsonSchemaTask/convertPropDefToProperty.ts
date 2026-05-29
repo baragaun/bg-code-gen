@@ -154,6 +154,21 @@ const convertPropDefToProperty = (
     } else {
       prop.type = 'object';
     }
+  } else {
+    // Unrecognized dataType: not a registered enum, not a referenced modelDef,
+    // not a primitive. The prop will still be returned but with `type` set to
+    // the raw dataType string, which is not a valid JSON Schema type. Surface
+    // a warning so this doesn't silently produce a malformed schema.
+    // Most common cause: an enum was added to a source project but never
+    // added to the corresponding enumInfos.ts registry.
+    const ownerModel = nestedModelNames[nestedModelNames.length - 1] || 'unknown';
+    console.warn(
+      `bg-code-gen jsonSchemaTask: unrecognized dataType "${propDef.dataType}" ` +
+      `on attribute "${ownerModel}.${propDef.name}". ` +
+      `Emitted prop will have an invalid JSON Schema type. ` +
+      `If "${dataType}" is an enum, add it to enumInfos.ts. ` +
+      `If it is a modelDef, ensure it is registered with the task.`
+    );
   }
 
   if (propDef.optional) {

@@ -153,6 +153,20 @@ const convertPropDefToProperty = (
     return `${indention}${propDef.name}: { ${parts.join(', ')} }`;
   }
 
+  // Unrecognized dataType: not a registered enum, not a referenced modelDef,
+  // not a primitive. The field will be dropped from the generated schema —
+  // surface a warning so this doesn't silently break production (e.g. admin
+  // edits via the affected model get discarded by Mongoose strict mode).
+  // Most common cause: an enum was added to a source project but never
+  // added to the corresponding enumInfos.ts registry.
+  const ownerModel = nestedModelNames[nestedModelNames.length - 1] || 'unknown';
+  console.warn(
+    `bg-code-gen mongooseSchemaTask: unrecognized dataType "${propDef.dataType}" ` +
+    `on attribute "${ownerModel}.${propDef.name}". ` +
+    `Field will be omitted from the generated schema. ` +
+    `If "${dataType}" is an enum, add it to enumInfos.ts. ` +
+    `If it is a modelDef, ensure it is registered with the task.`
+  );
   return '';
 }
 
