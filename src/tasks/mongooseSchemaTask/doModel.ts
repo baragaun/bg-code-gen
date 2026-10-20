@@ -80,8 +80,14 @@ const doModel = async (
     if (task.suppressReservedKeysWarning || (taskConfigsForThisTask as unknown as BgModelDefMongooseSchemaTaskConfig).suppressReservedKeysWarning) {
       suppressReservedKeysWarningOption = ', suppressReservedKeysWarning: true';
     }
-    outString += props.join(',\n') + ',\n}, { collection: \'' + modelDef.dbCollectionName + `'${suppressReservedKeysWarningOption} });
-`;
+    // Read the terminator from the target project like every other task type does
+    // (e.g. modelClassTask's getClassAttributes) instead of hardcoding ';': a project
+    // configured with addSemicolon: false (mmdata) would otherwise get semicolon
+    // churn on every schema file at each regen.
+    const semiColon = outSourceProject.addSemicolon === undefined || outSourceProject.addSemicolon
+      ? ';'
+      : ''
+    outString += props.join(',\n') + ',\n}, { collection: \'' + modelDef.dbCollectionName + `'${suppressReservedKeysWarningOption} })` + semiColon + '\n';
 
     const path = outSourceProject.rootPath
       ? `${outSourceProject.rootPath}/${modelDefTaskConfig.path}`
