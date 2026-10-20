@@ -7,7 +7,12 @@ export const getTypeScriptType = (
 ): string => {
   let s = attr.dataType
 
-  if (s === 'date' && isInputType) {
+  // Case-insensitive on purpose: modelDefs legitimately write 'Date' as well as
+  // 'date', and every other branch below matches case-insensitively. A capitalized
+  // 'Date' on an input type used to silently skip this widening and emit the
+  // narrower 'Date | null' — wrong for GraphQL input classes, which receive ISO
+  // strings from clients.
+  if (s.match(/^date$/i) && isInputType) {
     return 'Date | string | null'
   }
 
