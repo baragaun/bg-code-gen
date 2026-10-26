@@ -12,6 +12,12 @@ import { getDefaultText } from './getDefaultText.js'
 import getAllPropertyDefsForModelDef from '../helpers/getAllPropertyDefsForModelDef.js'
 import { haveCommonTags } from '../helpers/haveCommonTags.js'
 
+// Escapes a string for embedding inside a single-quoted JS string literal — backslashes first,
+// then single quotes, so a modelDef's description/deprecationReason containing an apostrophe
+// (e.g. "the user's session") doesn't break out of the generated literal and corrupt every
+// subsequent line of the file.
+const escapeForSingleQuotedString = (s: string): string => s.replace(/\\/g, '\\\\').replace(/'/g, '\\\'')
+
 const getClassAttributes = (
   modelDef: BgModelDef,
   task: ModelClassTask,
@@ -67,11 +73,11 @@ const getClassAttributes = (
     }
 
     if (attr.description) {
-      fieldDecoratorOptions.push(`description: '${attr.description}'`)
+      fieldDecoratorOptions.push(`description: '${escapeForSingleQuotedString(attr.description)}'`)
     }
 
     if (attr.deprecationReason) {
-      fieldDecoratorOptions.push(`deprecationReason: '${attr.deprecationReason}'`)
+      fieldDecoratorOptions.push(`deprecationReason: '${escapeForSingleQuotedString(attr.deprecationReason)}'`)
     }
 
     const fieldDecoratorOptionsArg = fieldDecoratorOptions.length > 0
