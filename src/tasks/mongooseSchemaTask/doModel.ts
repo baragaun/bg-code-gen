@@ -11,11 +11,7 @@ import { GraphqlType } from '../../enums.js'
 import extractImports from '../../helpers/extractImports.js'
 import { haveCommonTags } from '../helpers/haveCommonTags.js'
 
-const HEADER =`import mongoose from 'mongoose';
-
-const { Schema } = mongoose;
-
-`
+const HEADER_IMPORT = `import mongoose from 'mongoose'`
 
 const doModel = async (
   task: MongooseSchemaTask,
@@ -93,12 +89,16 @@ const doModel = async (
       ? `${outSourceProject.rootPath}/${modelDefTaskConfig.path}`
       : modelDefTaskConfig.path;
 
-    let header = HEADER;
+    // Same reasoning as the terminator above: the header's `const { Schema } = mongoose`
+    // line was still hardcoded with a semicolon even after the terminator fix, so a
+    // project configured with addSemicolon: false still got semicolon churn on this
+    // one line of every schema file.
+    let header = `${HEADER_IMPORT}${semiColon}\n\nconst { Schema } = mongoose${semiColon}\n\n`;
     try {
       if (fs.existsSync(path)) {
         const imports = extractImports(path);
         if (imports) {
-          header = imports + '\n\nconst { Schema } = mongoose;\n\n';
+          header = imports + `\n\nconst { Schema } = mongoose${semiColon}\n\n`;
         }
       }
       fs.writeFileSync(path, header + outString)
