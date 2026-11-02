@@ -13,10 +13,16 @@ import getAllPropertyDefsForModelDef from '../helpers/getAllPropertyDefsForModel
 import { haveCommonTags } from '../helpers/haveCommonTags.js'
 
 // Escapes a string for embedding inside a single-quoted JS string literal — backslashes first,
-// then single quotes, so a modelDef's description/deprecationReason containing an apostrophe
-// (e.g. "the user's session") doesn't break out of the generated literal and corrupt every
-// subsequent line of the file.
-const escapeForSingleQuotedString = (s: string): string => s.replace(/\\/g, '\\\\').replace(/'/g, '\\\'')
+// then single quotes, then line breaks, so a modelDef's description/deprecationReason containing
+// an apostrophe (e.g. "the user's session") or a raw newline (common in multi-line GraphQL SDL
+// descriptions) doesn't break out of the generated literal and corrupt every subsequent line of
+// the file. A single-quoted JS string literal can't contain a literal line break any more than it
+// can contain an unescaped quote.
+export const escapeForSingleQuotedString = (s: string): string => s
+  .replace(/\\/g, '\\\\')
+  .replace(/'/g, '\\\'')
+  .replace(/\n/g, '\\n')
+  .replace(/\r/g, '\\r')
 
 const getClassAttributes = (
   modelDef: BgModelDef,
